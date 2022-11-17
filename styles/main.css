@@ -1,4 +1,30 @@
 @font-face {
+    font-family: 'Open Sans Light';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.eot');
+    src:
+        local('Open Sans'),
+        local('OpenSans'),
+        url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.woff') format('woff'),
+        url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.svg#open_sansregular') format('svg');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.eot');
+    src:
+        local('Open Sans'),
+        local('OpenSans'),
+        url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.woff') format('woff'),
+        url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+}
+
+@font-face {
     font-family: 'Open Sans';
     font-weight: bold;
     font-style: normal;
@@ -67,6 +93,7 @@ samp {
     position: absolute;
     right: 0;
     left: 200px;
+    width: inherit;
 }
 
 article dl {
