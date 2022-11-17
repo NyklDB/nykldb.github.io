@@ -108,6 +108,8 @@ nav {
     top: 0;
     bottom: 0;
     overflow: auto;
+    margin-top: 0;
+    border-left: 0px;
 }
 
 nav ul {
