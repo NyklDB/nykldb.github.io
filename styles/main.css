@@ -2,13 +2,13 @@
     font-family: 'Open Sans';
     font-weight: bold;
     font-style: normal;
-    src: url('../fonts/OpenSans-Bold-webfont.eot');
+    src: url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.eot');
     src:
         local('Open Sans'),
         local('OpenSans'),
-        url('../fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/OpenSans-Bold-webfont.woff') format('woff'),
-        url('../fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
+        url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.woff') format('woff'),
+        url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
 }
 
 html {
@@ -22,6 +22,7 @@ body {
     line-height: 1.5;
     color: #b8bec7;
     background-color: #111;
+    margin: 0;
 }
 
 a,
@@ -101,7 +102,6 @@ nav {
     padding-top: 28px;
     width: 200px;
     box-sizing: border-box;
-    border-left: 1px solid #333;
     padding-left: 16px;
     position: fixed;
     left: 0;
