@@ -728,7 +728,7 @@ searchable: Boolean whether to index column for searches
 
             
 
-            <td class="description last"><p>callback function</p></td>
+            <td class="description last"><p>returns column name and index, and any errors</p></td>
         </tr>
 
     
@@ -961,7 +961,7 @@ searchable: Boolean whether to index column for searches
 
             
 
-            <td class="description last"><p>if row is a JSON object, the new row id is passed back only through a callback function</p></td>
+            <td class="description last"><p>returns id of the new row, or false if row could not be created, and any errors</p></td>
         </tr>
 
     
@@ -2055,7 +2055,7 @@ Possible future deprication and merge functionality into search</p>
 
             
 
-            <td class="description last"><p>the function to execute for each column in the table</p></td>
+            <td class="description last"><p>the function to execute for each column in the table, parameters: colName, colIndex, ofNumCols</p></td>
         </tr>
 
     
@@ -2611,7 +2611,7 @@ Possible future deprication and merge functionality into search</p>
 
             
 
-            <td class="description last"><p>callback</p></td>
+            <td class="description last"><p>returns a list of the table headers, and any errors</p></td>
         </tr>
 
     
@@ -3445,7 +3445,7 @@ Possible future deprication and merge functionality into search</p>
 
             
 
-            <td class="description last"><p>function accepting [min, max] and errors</p></td>
+            <td class="description last"><p>returns the min and max accepted values, and any errors</p></td>
         </tr>
 
     
@@ -3655,7 +3655,7 @@ value: tableValue //data
 
             
 
-            <td class="description last"><p>callback</p></td>
+            <td class="description last"><p>returns an array of objects containing values, types and column names, and any errors</p></td>
         </tr>
 
     
@@ -3817,7 +3817,7 @@ Same as getRow, except without the values</p>
 
             
 
-            <td class="description last"><p>callback</p></td>
+            <td class="description last"><p>returns a blank tableRow object containing all the table columns with their types, and any errors</p></td>
         </tr>
 
     
@@ -4334,7 +4334,7 @@ Same as getRow, except without the values</p>
 
             
 
-            <td class="description last"><p>returns a string[] and errors if any</p></td>
+            <td class="description last"><p>returns a array of textSelect or textSuggest dropdown menu button options, and any errors</p></td>
         </tr>
 
     
@@ -4601,7 +4601,7 @@ var table[a] = new NyckelDB(appId, title[a]).init();</p>
 
             
 
-            <td class="description last"><p>returns the names of all tables, and errors if any</p></td>
+            <td class="description last"><p>returns the names of all tables, and any errors</p></td>
         </tr>
 
     
@@ -5397,7 +5397,7 @@ by it's current position in the table</p></td>
 
             
 
-            <td class="description last"><p>callback function</p></td>
+            <td class="description last"><p>returns an array of values from the table, and any errors</p></td>
         </tr>
 
     
@@ -6594,7 +6594,7 @@ importCSV: <string>, CSV data that needs to be converted to JSON and then parsed
 
             
 
-            <td class="description last"><p>callback function</p></td>
+            <td class="description last"><p>returns the actual new column name set, and any errors</p></td>
         </tr>
 
     
@@ -8604,7 +8604,7 @@ been deleted!</p>
 
             
 
-            <td class="description last"><p>callback function</p></td>
+            <td class="description last"><p>returns a blank tableRow object containing all the table columns with their types, and any errors</p></td>
         </tr>
 
     
@@ -8872,7 +8872,7 @@ been deleted!</p>
 
             
 
-            <td class="description last"><p>callback function</p></td>
+            <td class="description last"><p>returns the actual validated value set, and any errors</p></td>
         </tr>
 
     
@@ -9681,7 +9681,7 @@ token: string
 
             
 
-            <td class="description last"><p>success, errors</p></td>
+            <td class="description last"><p>returns a file to upload to server after successful sync, or false if there is nothing to upload, and any errors</p></td>
         </tr>
 
     
@@ -9981,7 +9981,7 @@ token: string
 
             
 
-            <td class="description last"><p>callback function</p></td>
+            <td class="description last"><p>returns an object containing file, fileName and mimeType (as strings), and any errors</p></td>
         </tr>
 
     
@@ -10147,7 +10147,7 @@ token: string
 
             
 
-            <td class="description last"><p>callback function</p></td>
+            <td class="description last"><p>returns an object containing file, fileName and mimeType (as strings), and any errors</p></td>
         </tr>
 
     
@@ -10588,7 +10588,7 @@ token: string
 
             
 
-            <td class="description last"><p>callback function</p></td>
+            <td class="description last"><p>returns the value accepted by the database, any errors, and a description of the error</p></td>
         </tr>
 
     
@@ -10702,7 +10702,7 @@ token: string
 
 <footer>
     Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a>
-     on 4/10/2022
+     on 17/11/2022
 </footer>
 
 <script> prettyPrint(); </script>
