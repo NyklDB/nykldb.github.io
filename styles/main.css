@@ -258,7 +258,7 @@ tr>th:last-child {
 }
 
 tbody tr:nth-child(odd) {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 tbody tr:nth-child(even) {
@@ -354,6 +354,7 @@ tbody tr:nth-child(even) {
 
 .prettyprint.source {
     width: inherit;
+    background-color: #0b0e17;
 }
 
 .prettyprint code {
