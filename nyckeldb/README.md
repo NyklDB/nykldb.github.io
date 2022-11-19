@@ -6,8 +6,9 @@
 
 NyckelDB is a highly structured JavaScript data store. Any data that you can visualize as a table or spreadsheet can 
 be stored in a NyckelDB object. NyckelDB data is [sortable, filterable](#sort-shuffle-and-filter), 
-[searchable](#search), [syncable and shareable](#sync-and-share). All data inputs are validated according to data 
-type, and data can be imported or exported as JSON or CSV (coming soon).
+[searchable](#search), [syncable and shareable](#sync-and-share). All data inputs are [validated](#data-validation) 
+according to [data type](#types), and data can be [imported](#importing-data) or exported as JSON or CSV (coming 
+soon).
 
 ## Table of Contents
 
@@ -28,7 +29,6 @@ type, and data can be imported or exported as JSON or CSV (coming soon).
   * [The Options Parameter](#the-options-parameter)
     * [Importing Data](#importing-data)
     * [Custom Properties](#custom-properties)
-* [Full API Documentation](#full-api-documentation)
 * [Dependencies](#dependencies)
 
 # <a id="overview"></a> Overview
@@ -42,9 +42,9 @@ What does that mean?
 - Client-side: Because NyckelDB is written in JavaScript (Typescript actually, and transpiled to JavaScript), it 
 runs on your local device in a web browser, not on a server.
 
-- Portable: A database typically means a single 'base' for your data, usually in the cloud. All API calls reference
- that <i>single source of truth</i>. NyckelDB aims to break that model. You may have a copy of your NyckelDB on your
-  phone, one on your PC, and another on your friend's PC. When you want to update one copy from another copy, you 
+- Portable: A database historically means a single 'base' for your data, usually on a server. All API calls 
+  reference that <i>single source of truth</i>. However with NyckelDB, you may have a copy of your data on your
+  phone, on your PC, and another copy on your friend's PC. When you want to update one copy from another copy, you 
   simply <i>synchronize</i> them. This enables you to use your data offline, and synchronize it when you connect 
   again. [See Syncing and sharing your data](#sync-and-share).
 
@@ -302,7 +302,7 @@ passed to the table on setup. A callback function can return a boolean value ind
 data store was successfully created and initiated, and any error messages. Inside the callback function, 'this' 
 refers to the NyckelDB instance.
 
-> [See more details about the NyckelDB API below](#full-api-documentation)
+> [See more details about the NyckelDB class](https://ggoodkey.github.io/nyckeldb/0.8.0/NyckelDB.html)
 
 ```javascript
 var appId = "Company App", //new in version 0.7.0
@@ -432,10 +432,6 @@ customProperties:{
     }
 }	
 ```
-
-# <a id="full-api-documentation"></a> Full API Documentation
-
-[https://ggoodkey.github.io/nyckeldb/0.8.0/NyckelDB.html](https://ggoodkey.github.io/nyckeldb/0.8.0/NyckelDB.html)
 
 # <a id="dependencies"></a> Dependencies
 
