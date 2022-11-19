@@ -47,10 +47,10 @@
         <article><h1><img src="nyckeldb-logo.png" alt="N" id="nyckeldb-logo">yckelDB Documentation</h1>
 <h4>NyckelDB Version 0.8.0</h4>
 <h5>November 16, 2022</h5>
-<p>NyckelDB is a highly structured JavaScript data store. Any data that
-you can visualize as a table or spreadsheet can be stored in a NyckelDB object. NyckelDB data
-is sortable, searchable, filterable, syncable and shareable. All data inputs are validated
-according to data type, and data can be imported or exported as JSON or CSV (coming soon).</p>
+<p>NyckelDB is a highly structured JavaScript data store. Any data that you can visualize as a table or spreadsheet can
+be stored in a NyckelDB object. NyckelDB data is <a href="#sort-shuffle-and-filter">sortable, filterable</a>,
+<a href="#search">searchable</a>, <a href="#sync-and-share">syncable and shareable</a>. All data inputs are validated according to data
+type, and data can be imported or exported as JSON or CSV (coming soon).</p>
 <h2>Table of Contents</h2>
 <ul>
 <li><a href="#overview">Overview</a></li>
@@ -88,7 +88,27 @@ according to data type, and data can be imported or exported as JSON or CSV (com
 <h1><a id="overview"></a> Overview</h1>
 <p>Nyckel (nick-ale) is a Swedish word that means &quot;key&quot;.</p>
 <p>The basic concept of NyckelDB is to create a portable JavaScript client-side data store with data type validation.</p>
-<p>NyckelDB can be visualized as having a table-like structure (Figure 1), with table headers, and table rows, although the actual structure is JSON (Figure 2).</p>
+<p>What does that mean?</p>
+<ul>
+<li>
+<p>Client-side: Because NyckelDB is written in JavaScript (Typescript actually, and transpiled to JavaScript), it
+runs on your local device in a web browser, not on a server.</p>
+</li>
+<li>
+<p>Portable: A database typically means a single 'base' for your data, usually in the cloud. All API calls reference
+that <i>single source of truth</i>. NyckelDB aims to break that model. You may have a copy of your NyckelDB on your
+phone, one on your PC, and another on your friend's PC. When you want to update one copy from another copy, you
+simply <i>synchronize</i> them. This enables you to use your data offline, and synchronize it when you connect
+again. <a href="#sync-and-share">See Syncing and sharing your data</a>.</p>
+</li>
+<li>
+<p>Data type validation: NyckelDB ensures that data that you write to it is correct before it gets written, according
+to the <i>type</i> of data that you specified. This helps to elliminate or correct many common input mistakes.
+<a href="#types">See data types</a>.</p>
+</li>
+</ul>
+<p>NyckelDB can be visualized as having a table-like structure (Figure 1), with table headers, and table rows, although
+the actual structure is JSON (Figure 2).</p>
 <table>
 <thead>
 <tr>
@@ -162,20 +182,25 @@ according to data type, and data can be imported or exported as JSON or CSV (com
 
 </code></pre>
 <p><em>Figure 2: What a NyckelDB table really looks like</em></p>
-<p>The data store can run along side your other JavaScript code by adding a &lt;script&gt; tag directly to your HTML document, include it as a Javascript module, or run it in a background task in a Web Worker (which is recommended).</p>
+<p>The data store can run along side your other JavaScript code by adding a &lt;script&gt; tag directly to your HTML
+document, include it as a Javascript module, or run it in a background task in a Web Worker (which is recommended).</p>
 <p>NyckelDB stores data temporarily in the browser using indexed-db.
-For more persistant storage, you can export the data from NyckelDB as a JSON file and send it to your own cloud solution.
-Synchronisation is handled client-side when you import that JSON file back into the NyckelDB.</p>
-<p>LZString compression is used so you can fit many MB of data in the very limited localStorage space that some browsers allow, and reduce bandwidth if uploading to a cloud service provider.</p>
-<p>All data written to the data store is automatically validated before being written, taking care of much of your form validation work for you such as names, email addresses and phone numbers.</p>
+For more persistant storage, you can export the data from NyckelDB as a JSON file and send it to your own cloud
+solution. Synchronisation is handled client-side when you import that JSON file back into the NyckelDB.</p>
+<p>LZString compression is used so you can fit many MB of data in the very limited localStorage space that some
+browsers allow, and reduce bandwidth if uploading to a cloud service provider.</p>
+<p>All data written to the data store is automatically validated before being written, taking care of much of your form
+validation work for you such as names, email addresses and phone numbers.</p>
 <h1><a id="features"></a> Features</h1>
-<p>Other than the basic read/write functionality that would be expected in any type of data storage solution, NyckelDB also contains the following features:</p>
+<p>Other than the basic read/write functionality that would be expected in any type of data storage solution, NyckelDB
+also contains the following features:</p>
 <h3><a id="sort-shuffle-and-filter"></a> Sort, Shuffle and Filter</h3>
-<p>Like a table, data can be sorted alphabetically/numerically by any column in the table, or conversely, shuffled to be completely random – useful if you want to create a playlist, or stack of flashcards.</p>
+<p>Like a table, data can be sorted alphabetically/numerically by any column in the table, or conversely, shuffled to
+be completely random – useful if you want to create a playlist, or stack of flashcards.</p>
 <p>The table can also be filtered by column, based on matching a given regular expression.</p>
 <h3><a id="search"></a> Search</h3>
-<p>NyckelDB contains a basic search engine. Data is search indexed for fast search results based on whole, and multiple words,
-returning results in order of best match.
+<p>NyckelDB contains a basic search engine. Data is search indexed for fast search results based on whole, and multiple
+words, returning results in order of best match.
 Complex searches can be created with the + and - operators, which correspond to AND and NOT respectively.
 Fuzzy matching can be used in some cases to return near matches, for example, common names or spelling mistakes.</p>
 <p>You can add your own &quot;dictionary&quot; JSON file to refine your search experience. For example:</p>
@@ -188,31 +213,37 @@ Fuzzy matching can be used in some cases to return near matches, for example, co
 </code></pre>
 <p>In this case if you searched for <code>searchterm</code>, you would instead get the search results for <code>equivelent searchterm</code> and <code>another one</code>. If you searched for <code>something</code>, you would get search results for <code>something else</code>.</p>
 </blockquote>
-<p>All searches are case insensitive; searches are done in lowercase only, therefore the dictionary file need only be in lowercase.</p>
+<p>All searches are case insensitive; searches are done in lowercase only, therefore the dictionary file need only be
+in lowercase.</p>
 <h3><a id="search-suggestions"></a> Search Suggestions</h3>
-<p>NyckelDB can aid, or hint to a user what they might be able to search for by returning search suggestions based on partial word matches.
-This is surprisingly fast and can be used to create an as-you-type experience to fill in a search box and/or the dropdown list under the search box.
-Recent successful searches are cached and returned at the top of the next search suggestion, giving you search history as well (though
-this cache isn't saved anywhere so will be gone the next time you access the app or webpage).</p>
+<p>NyckelDB can aid, or hint to a user what they might be able to search for by returning search suggestions based on
+partial word matches. This is surprisingly fast and can be used to create an as-you-type experience to fill in a
+search box and/or the dropdown list under the search box. Recent successful searches are cached and returned at the
+top of the next search suggestion, giving you search history as well (though this cache isn't saved anywhere so will
+be gone the next time you access the app or webpage).</p>
 <h3><a id="sync-and-share"></a>Sync and Share</h3>
-<p>Data can be exported as a JSON file which can be saved or transferred somewhere and reimported
-without worrying about overwriting more recent data because all data (in every single cell) is stored with accompanying LastModified attributes.</p>
+<p>Data can be exported as a JSON file which can be saved or transferred somewhere and reimported without worrying
+about overwriting more recent data because all data (in every single cell) is stored with accompanying LastModified
+attributes.</p>
 <p>This means that data can be synchronized between local storage and cloud storage, devices, or even people.
 Conflict resolution follows the assumption that the most recent data in each cell is the data that you want to keep.</p>
 <p>Sharing data securely based on a Diffie-Hellman key exchange system coming soon...</p>
 <h3><a id="data-validation"></a> Data Validation</h3>
-<p>Data that you input into a NyckelDB object is validated before it is saved, at a minimum, by verifying that it is either a String, Number, or Boolean value.
-All data <em>must</em> fall into one of these three categories. Other types of data, such as JavaScript Objects, Arrays or the values 'null' and 'undefined'
-are not allowed in a NyckelDB and will throw an error.</p>
-<p>Within these 3 general types of data are many more subtypes.
-Additional data validation, and sometimes error correction can be done by specifying a subtype, i.e. streetAddress is a subtype of String.
-Some subtypes fall into more than one category such as <em>postalZipCode</em> which can be a String or a Number.
-<a href="#types">See Types below</a> for a complete list of all the different subtypes.</p>
-<p>If you want the most flexibility you can specify <em>any</em>, which will allow any type of data to be saved to that column in the table, as long as it is a String, Number or Boolean value (though there is no additional validation).</p>
-<p>The data type for each column in the table is best specified when the table is created, but in some cases can be changed afterwards, if it doesn't cause a conflict with the existing data in the table.</p>
+<p>Data that you input into a NyckelDB object is validated before it is saved, at a minimum, by verifying that it is
+either a String, Number, or Boolean value. All data <em>must</em> fall into one of these three categories. Other types of
+data, such as JavaScript Objects, Arrays or the values 'null' and 'undefined' are not allowed in a NyckelDB and will
+throw an error.</p>
+<p>Within these 3 general types of data are many more subtypes. Additional data validation, and sometimes error
+correction can be done by specifying a subtype, i.e. streetAddress is a subtype of String. Some subtypes fall into
+more than one category such as <em>postalZipCode</em> which can be a String or a Number. <a href="#types">See Types below</a> for a
+complete list of all the different subtypes.</p>
+<p>If you want the most flexibility you can specify <em>any</em>, which will allow any type of data to be saved to that column
+in the table, as long as it is a String, Number or Boolean value (though there is no additional validation).</p>
+<p>The data type for each column in the table is best specified when the table is created, but in some cases can be
+changed afterwards, if it doesn't cause a conflict with the existing data in the table.</p>
 <h3><a id="formulas"></a> Formulas</h3>
-<p>You can set a formula on a particular column to pre-calculate its values. Formulas are one line expressions that follow
-the following rules:</p>
+<p>You can set a formula on a particular column to pre-calculate its values. Formulas are one line expressions that
+follow the following rules:</p>
 <ul>
 <li>Start with a function name, followed by parentheses</li>
 <li>Put function parameters inside the parentheses, separated by commas</li>
@@ -356,13 +387,15 @@ gets the value in column 'LastName', converts it to ALL CAPS, joins it with a &q
 </tbody>
 </table>
 <h1><a id="types"></a> Types</h1>
-<p>The type of data that a column expects can be specified when creating a new table or adding a new column to a table. Any
-data that you try to set on a cell will be first validated according to what type of data the column accepts. In some cases
-the data will be coerced into fitting into the column type, for example converting the string value &quot;4&quot; into the number 4,
-or an error will be returned.</p>
-<p>Some of the types are actually validated exactly the same, for example <strong>string</strong> and <strong>multilineString</strong>, but you can use
-a specific type to indicate what sort of input field to provide to the user for that particular value. A <strong>string</strong> value
-might use a basic <code>input</code> of <code>type=&quot;text&quot;</code>, whereas a <strong>multilineString</strong> may work better as a <code>textarea</code> element. Likewise a <strong>color</strong> type would work good with a <code>input</code> of <code>type=&quot;color&quot;</code> and <strong>date</strong> with a <code>type=&quot;date&quot;</code> input.</p>
+<p>The type of data that a column expects can be specified when creating a new table or adding a new column to a table.
+Any data that you try to set on a cell will be first validated according to what type of data the column accepts.
+In some cases the data will be coerced into fitting into the column type, for example converting the string value
+&quot;4&quot; into the number 4, or an error will be returned.</p>
+<p>Some of the types are actually validated exactly the same, for example <strong>string</strong> and <strong>multilineString</strong>, but you
+can use a specific type to indicate what sort of input field to provide to the user for that particular value. A
+<strong>string</strong> value might use a basic <code>input</code> of <code>type=&quot;text&quot;</code>, whereas a <strong>multilineString</strong> may work better as a
+<code>textarea</code> element. Likewise a <strong>color</strong> type would work good with a <code>input</code> of <code>type=&quot;color&quot;</code> and <strong>date</strong> with a
+<code>type=&quot;date&quot;</code> input.</p>
 <p>The following types can be specified:</p>
 <h3><a id="string-types"></a>String types</h3>
 <ul>
@@ -423,7 +456,14 @@ might use a basic <code>input</code> of <code>type=&quot;text&quot;</code>, wher
     &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/nyckelDB.min.js&quot;>&lt;/script>
 </code></pre>
 <h3><a id="setting-up-a-new-nyckeldb-object"></a> Setting up a new NyckelDB Object</h3>
-<p>Setting up a new NyckelDB object is as simple as calling the constructor using the &quot;new&quot; keyword and giving it a unique app ID, and a title. The app ID can be the name of the app or any other identifier to distinguish between other web apps that could be distributed from the same web domain. The title identifies this particular NyckelDB data store. After the NyckelDB data store is created, initialize it by calling the &quot;init&quot; function and passing it the required table parameters: &quot;headers&quot;, and &quot;types&quot;. Optional &quot;customProperties&quot; and &quot;importData&quot; can also be passed to the table on setup. A callback function can return a boolean value indicating whether or not the NyckelDB data store was successfully created and initiated, and any error messages. Inside the callback function, 'this' refers to the NyckelDB instance.</p>
+<p>Setting up a new NyckelDB object is as simple as calling the constructor using the &quot;new&quot; keyword and giving it a
+unique app ID, and a title. The app ID can be the name of the app or any other identifier to distinguish between
+other web apps that could be distributed from the same web domain. The title identifies this particular NyckelDB
+data store. After the NyckelDB data store is created, initialize it by calling the &quot;init&quot; function and passing it
+the required table parameters: &quot;headers&quot;, and &quot;types&quot;. Optional &quot;customProperties&quot; and &quot;importData&quot; can also be
+passed to the table on setup. A callback function can return a boolean value indicating whether or not the NyckelDB
+data store was successfully created and initiated, and any error messages. Inside the callback function, 'this'
+refers to the NyckelDB instance.</p>
 <blockquote>
 <p><a href="#full-api-documentation">See more details about the NyckelDB API below</a></p>
 </blockquote>
@@ -444,8 +484,9 @@ var myTable = new APP.NyckelDB(appId, title);
 myTable.init(headers, types, options, callback);
 myTable.getLength(); //returns 0
 </code></pre>
-<p>There is quite a bit of flexibility in how you want to go about setting up a new NyckelDB object. Headers can be passed as an Array, and types as a corresponding Array (as shown above),
-or you can pass types as an Object in the form:</p>
+<p>There is quite a bit of flexibility in how you want to go about setting up a new NyckelDB object. Headers can be
+passed as an Array, and types as a corresponding Array (as shown above), or you can pass types as an Object in the
+form:</p>
 <pre class="prettyprint source lang-javascript"><code>var types = { 
     &quot;Month&quot;: &quot;date&quot;,
     &quot;Monthly Income&quot;: &quot;posInteger&quot;,
@@ -460,10 +501,11 @@ themselves in the first parameter instead of an Array, and the second parameter 
 <p><strong>Q: When should you use an Array for your column headers? When would order matter?</strong></p>
 <p>A: If you want to display the data from an entire row all at once on the screen in a specific order,
 or if you receive your data as an Array and want to pass it directly into a newly created row in your
-table at once. You can work around this by reordering the output afterwards of course, but better to be aware of this in the beginning.</p>
+table at once. You can work around this by reordering the output afterwards of course, but better to be aware of
+this in the beginning.</p>
 </blockquote>
-<p>Finally, additional metadata can be set such as whether a column should be indexed for searching, what it's initial value should be if nothing is
-specified, or even a <a href="#formulas">formula</a>, by passing Types in like this:</p>
+<p>Finally, additional metadata can be set such as whether a column should be indexed for searching, what it's initial
+value should be if nothing is specified, or even a <a href="#formulas">formula</a>, by passing Types in like this:</p>
 <pre class="prettyprint source lang-javascript"><code>var types = { 
     &quot;Month&quot;: { 
         &quot;type&quot;: &quot;string&quot;, 
@@ -486,8 +528,8 @@ specified, or even a <a href="#formulas">formula</a>, by passing Types in like t
 }
 </code></pre>
 <h3><a id="the-options-parameter"></a> The Options Parameter</h3>
-<p>The 'options' parameter accepts an Object. It may contain data to import immediately after the database is
-created in the form of a CSV file (string), or JSON object, and custom properties that you would like to add to your table.</p>
+<p>The 'options' parameter accepts an Object. It may contain data to import immediately after the database is created
+in the form of a CSV file (string), or JSON object, and custom properties that you would like to add to your table.</p>
 <pre class="prettyprint source lang-javascript"><code>var options = {
     &quot;importData&quot;: nyckelDBTable,
     &quot;importJSON&quot;: json,
@@ -516,9 +558,10 @@ created in the form of a CSV file (string), or JSON object, and custom propertie
 &quot;importCSV&quot;: string, 
 </code></pre>
 <h5><a id="custom-properties"></a> Custom Properties</h5>
-<p>Custom properties can be used for data that doesn't quite fit into the &quot;table&quot; model, such as maybe some metadata that applies to the entire database.
-The existence of a custom property must be initiated when the NyckelDB object is created, and must be given an initial value.
-Just like table columns, custom properties can be given a data type as well, or they will default to the type <code>&quot;any&quot;</code>.</p>
+<p>Custom properties can be used for data that doesn't quite fit into the &quot;table&quot; model, such as maybe some metadata
+that applies to the entire database. The existence of a custom property must be initiated when the NyckelDB object
+is created, and must be given an initial value. Just like table columns, custom properties can be given a data type
+as well, or they will default to the type <code>&quot;any&quot;</code>.</p>
 <pre class="prettyprint source lang-javascript"><code>customProperties:{
     //name the custom property what ever you want
     &quot;FinalBalance&quot;: {
