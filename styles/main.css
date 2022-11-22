@@ -110,6 +110,7 @@ section {
     padding: 12px 24px;
     border: 1px solid #274c75;
     margin-right: 30px;
+    margin-bottom: 24px;
 }
 
 .variation {
@@ -458,5 +459,29 @@ tbody tr:nth-child(even) {
 
     .atn {
         color: #a4c3e7
+    }
+}
+
+@media print {
+   #main {
+    left: 0;
+    }
+    nav {
+        display: none;
+    }
+    section {
+        margin-right: 0;
+        padding: 0;
+        border: none;
+    }
+    footer {
+        display: none;
+    }
+    h1:not(:first-child),
+    h3.subsection-title:not(:nth-child(2)) {
+        page-break-before: always;
+    }
+    .page-title {
+        display: none;
     }
 }
