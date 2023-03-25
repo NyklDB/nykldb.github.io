@@ -369,7 +369,7 @@
 
 
 <div class="description">
-    <p>Clear all the locally cached copies of all the NyckelDB databases.</p>
+    <p>Clear all the locally cached copies of all the NyckelDB tables.</p>
 </div>
 
 
@@ -1121,7 +1121,7 @@ Possible future deprication and merge functionality into search</p>
 
             
 
-            <td class="description last"><p>words to search for in the database</p></td>
+            <td class="description last"><p>words to search for in the table</p></td>
         </tr>
 
     
@@ -3014,7 +3014,7 @@ Possible future deprication and merge functionality into search</p>
 
         
 <div class="param-desc">
-    <p>database modified timestamp</p>
+    <p>table modified timestamp</p>
 </div>
 
 
@@ -3337,6 +3337,203 @@ Possible future deprication and merge functionality into search</p>
 |
 
 <span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getProps"><span class="type-signature"></span>getProps<span class="signature">(propNames, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get the values of table custom properties</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>propNames</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>the names of the custom properties</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#getProps_callback">getProps_callback</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>function returning an object, and errors</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>the property values in key value pairs</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
 
 
     </dd>
@@ -5342,6 +5539,9 @@ by it's current position in the table</p></td>
             
                 
 <span class="param-type">Array.&lt;string></span>
+|
+
+<span class="param-type">Array.&lt;number></span>
 
 
             
@@ -5880,7 +6080,7 @@ other calls will also automatically unhide all rows including sync, importJSON, 
 
 
 <div class="description">
-    <p>Initiate the database. Required to call this right after creating a new NyckelDB obj. Sets initial values, checks for cached data and builds the search index</p>
+    <p>Initiate the table. Required to call this right after creating a new NyckelDB obj. Sets initial values, checks for cached data and builds the search index</p>
 </div>
 
 
@@ -6249,7 +6449,7 @@ other calls will also automatically unhide all rows including sync, importJSON, 
 
 
 <div class="description">
-    <p>Checks whether there are changes since the last time the database was synchronized</p>
+    <p>Checks whether there are changes since the last time the table was synchronized</p>
 </div>
 
 
@@ -6311,7 +6511,7 @@ other calls will also automatically unhide all rows including sync, importJSON, 
 
             
 
-            <td class="description last"><p>token that contains the version number, hashed message authentication code (HMAC) and lastSync timestamp of the database</p></td>
+            <td class="description last"><p>token that contains the version number, hashed message authentication code (HMAC) and lastSync timestamp of the table</p></td>
         </tr>
 
     
@@ -6742,7 +6942,7 @@ other calls will also automatically unhide all rows including sync, importJSON, 
 
             
 
-            <td class="description last"><p>words to search for in the database</p></td>
+            <td class="description last"><p>words to search for in the table</p></td>
         </tr>
 
     
@@ -7720,7 +7920,7 @@ Any existing data in the column will be overwritten with the calculated values</
 
             
 
-            <td class="description last"><p>token that contains the version number, hashed message authentication code (HMAC) and lastSync timestamp of the database</p></td>
+            <td class="description last"><p>token that contains the version number, hashed message authentication code (HMAC) and lastSync timestamp of the table</p></td>
         </tr>
 
     
@@ -9525,7 +9725,7 @@ been deleted!</p>
 
 
 <div class="description">
-    <p>Synchronize with an external copy of the database.</p>
+    <p>Synchronize with an external copy of the table.</p>
 </div>
 
 
@@ -9825,7 +10025,7 @@ token: string
 
         
 <div class="param-desc">
-    <p>database in CSV string format</p>
+    <p>table in CSV string format</p>
 </div>
 
 
@@ -9959,7 +10159,7 @@ token: string
 
             
 
-            <td class="description last"><p>returns an object containing file, fileName and mimeType (as strings), and any errors</p></td>
+            <td class="description last"><p>returns an object containing file, fileName, tableName and mimeType (as strings), and any errors</p></td>
         </tr>
 
     
@@ -10024,7 +10224,7 @@ token: string
 
         
 <div class="param-desc">
-    <p>stringified database in array format</p>
+    <p>stringified table in array format</p>
 </div>
 
 
@@ -10125,7 +10325,7 @@ token: string
 
             
 
-            <td class="description last"><p>returns an object containing file, fileName and mimeType (as strings), and any errors</p></td>
+            <td class="description last"><p>returns an object containing file, fileName, tableName and mimeType (as strings), and any errors</p></td>
         </tr>
 
     
@@ -10193,7 +10393,7 @@ token: string
 
         
 <div class="param-desc">
-    <p>stringified database in json format</p>
+    <p>stringified table in json format</p>
 </div>
 
 
@@ -10566,7 +10766,7 @@ token: string
 
             
 
-            <td class="description last"><p>returns the value accepted by the database, any errors, and a description of the error</p></td>
+            <td class="description last"><p>returns the value accepted by the table, any errors, and a description of the error</p></td>
         </tr>
 
     
@@ -11785,7 +11985,7 @@ an Object like this {Column_1:{type: &quot;string&quot;...}, Column_2:{type: &qu
 
             
 
-            <td class="description last"><p>an object containing file, fileName and mimeType (as strings)</p></td>
+            <td class="description last"><p>an object containing file, fileName, tableName and mimeType (as strings)</p></td>
         </tr>
 
     
@@ -11947,6 +12147,167 @@ an Object like this {Column_1:{type: &quot;string&quot;...}, Column_2:{type: &qu
             
 
             <td class="description last"><p>a list of the table headers</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>errors</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
+|
+
+<span class="param-type">false</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="getProps_callback"><span class="type-signature"></span>getProps_callback<span class="signature">(props, errors)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>This callback returns a value as it's first parameter</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>key value pairs from the table</p></td>
         </tr>
 
     
@@ -12432,7 +12793,7 @@ an Object like this {Column_1:{type: &quot;string&quot;...}, Column_2:{type: &qu
 
             
 
-            <td class="description last"><p>an array of objects containing values, types, and column names from the database</p></td>
+            <td class="description last"><p>an array of objects containing values, types, and column names from the table</p></td>
         </tr>
 
     
@@ -12984,7 +13345,7 @@ an Object like this {Column_1:{type: &quot;string&quot;...}, Column_2:{type: &qu
 
             
 
-            <td class="description last"><p>an array of values from the database</p></td>
+            <td class="description last"><p>an array of values from the table</p></td>
         </tr>
 
     
@@ -13154,7 +13515,7 @@ an Object like this {Column_1:{type: &quot;string&quot;...}, Column_2:{type: &qu
 
             
 
-            <td class="description last"><p>a value from the database</p></td>
+            <td class="description last"><p>a value from the table</p></td>
         </tr>
 
     
@@ -13438,7 +13799,7 @@ an Object like this {Column_1:{type: &quot;string&quot;...}, Column_2:{type: &qu
 
             
 
-            <td class="description last"><p>table data that is ready to drop into the database</p></td>
+            <td class="description last"><p>table data that is ready to drop into the table</p></td>
         </tr>
 
     
@@ -15116,7 +15477,7 @@ an Object like this {Column_1:{type: &quot;string&quot;...}, Column_2:{type: &qu
             
 
             <td class="description last"><p>a file to upload to server after successful sync, or false if there is nothing to upload.
-Contains the title (database title), file (compressed data), and the syncFile and syncToken (sync metadata) as strings</p></td>
+Contains the title (table title), file (compressed data), and the syncFile and syncToken (sync metadata) as strings</p></td>
         </tr>
 
     
@@ -15346,7 +15707,7 @@ Contains the title (database title), file (compressed data), and the syncFile an
 
             
 
-            <td class="description last"><p>the value accepted by the database</p></td>
+            <td class="description last"><p>the value accepted by the table</p></td>
         </tr>
 
     
@@ -15481,14 +15842,14 @@ Contains the title (database title), file (compressed data), and the syncFile an
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="NyckelDB.html">NyckelDB</a></li></ul><h3>Global</h3><ul><li><a href="global.html#NUKEALL">NUKEALL</a></li><li><a href="global.html#addColumn">addColumn</a></li><li><a href="global.html#addRow">addRow</a></li><li><a href="global.html#advancedSearch">advancedSearch</a></li><li><a href="global.html#deleteColumn">deleteColumn</a></li><li><a href="global.html#deleteRow">deleteRow</a></li><li><a href="global.html#deleteTable">deleteTable</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#forEachCol">forEachCol</a></li><li><a href="global.html#forEachRow">forEachRow</a></li><li><a href="global.html#getFormula">getFormula</a></li><li><a href="global.html#getHeaders">getHeaders</a></li><li><a href="global.html#getIndexOf">getIndexOf</a></li><li><a href="global.html#getLastModified">getLastModified</a></li><li><a href="global.html#getLength">getLength</a></li><li><a href="global.html#getProp">getProp</a></li><li><a href="global.html#getRange">getRange</a></li><li><a href="global.html#getRow">getRow</a></li><li><a href="global.html#getRowTemplate">getRowTemplate</a></li><li><a href="global.html#getSearchSuggestions">getSearchSuggestions</a></li><li><a href="global.html#getSearchableColumns">getSearchableColumns</a></li><li><a href="global.html#getTextOptions">getTextOptions</a></li><li><a href="global.html#getTitle">getTitle</a></li><li><a href="global.html#getTitles">getTitles</a></li><li><a href="global.html#getType">getType</a></li><li><a href="global.html#getTypes">getTypes</a></li><li><a href="global.html#getVal">getVal</a></li><li><a href="global.html#getVals">getVals</a></li><li><a href="global.html#hideRow">hideRow</a></li><li><a href="global.html#importJSON">importJSON</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isDeleted">isDeleted</a></li><li><a href="global.html#isSyncPending">isSyncPending</a></li><li><a href="global.html#renameColumn">renameColumn</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setFormula">setFormula</a></li><li><a href="global.html#setProp">setProp</a></li><li><a href="global.html#setRange">setRange</a></li><li><a href="global.html#setSearchable">setSearchable</a></li><li><a href="global.html#setSyncCompleted">setSyncCompleted</a></li><li><a href="global.html#setTableVals">setTableVals</a></li><li><a href="global.html#setTextOptions">setTextOptions</a></li><li><a href="global.html#setTitle">setTitle</a></li><li><a href="global.html#setType">setType</a></li><li><a href="global.html#setVal">setVal</a></li><li><a href="global.html#setVals">setVals</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#sortByCol">sortByCol</a></li><li><a href="global.html#sync">sync</a></li><li><a href="global.html#toCSV">toCSV</a></li><li><a href="global.html#toJSON_Array">toJSON_Array</a></li><li><a href="global.html#toJSON_KeyValuePairs">toJSON_KeyValuePairs</a></li><li><a href="global.html#unfilter">unfilter</a></li><li><a href="global.html#unhideRows">unhideRows</a></li><li><a href="global.html#valid_boolean_types">valid_boolean_types</a></li><li><a href="global.html#valid_data_types">valid_data_types</a></li><li><a href="global.html#valid_number_types">valid_number_types</a></li><li><a href="global.html#valid_string_types">valid_string_types</a></li><li><a href="global.html#validate">validate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="NyckelDB.html">NyckelDB</a></li></ul><h3>Global</h3><ul><li><a href="global.html#NUKEALL">NUKEALL</a></li><li><a href="global.html#addColumn">addColumn</a></li><li><a href="global.html#addRow">addRow</a></li><li><a href="global.html#advancedSearch">advancedSearch</a></li><li><a href="global.html#deleteColumn">deleteColumn</a></li><li><a href="global.html#deleteRow">deleteRow</a></li><li><a href="global.html#deleteTable">deleteTable</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#forEachCol">forEachCol</a></li><li><a href="global.html#forEachRow">forEachRow</a></li><li><a href="global.html#getFormula">getFormula</a></li><li><a href="global.html#getHeaders">getHeaders</a></li><li><a href="global.html#getIndexOf">getIndexOf</a></li><li><a href="global.html#getLastModified">getLastModified</a></li><li><a href="global.html#getLength">getLength</a></li><li><a href="global.html#getProp">getProp</a></li><li><a href="global.html#getProps">getProps</a></li><li><a href="global.html#getRange">getRange</a></li><li><a href="global.html#getRow">getRow</a></li><li><a href="global.html#getRowTemplate">getRowTemplate</a></li><li><a href="global.html#getSearchSuggestions">getSearchSuggestions</a></li><li><a href="global.html#getSearchableColumns">getSearchableColumns</a></li><li><a href="global.html#getTextOptions">getTextOptions</a></li><li><a href="global.html#getTitle">getTitle</a></li><li><a href="global.html#getTitles">getTitles</a></li><li><a href="global.html#getType">getType</a></li><li><a href="global.html#getTypes">getTypes</a></li><li><a href="global.html#getVal">getVal</a></li><li><a href="global.html#getVals">getVals</a></li><li><a href="global.html#hideRow">hideRow</a></li><li><a href="global.html#importJSON">importJSON</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isDeleted">isDeleted</a></li><li><a href="global.html#isSyncPending">isSyncPending</a></li><li><a href="global.html#renameColumn">renameColumn</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setFormula">setFormula</a></li><li><a href="global.html#setProp">setProp</a></li><li><a href="global.html#setRange">setRange</a></li><li><a href="global.html#setSearchable">setSearchable</a></li><li><a href="global.html#setSyncCompleted">setSyncCompleted</a></li><li><a href="global.html#setTableVals">setTableVals</a></li><li><a href="global.html#setTextOptions">setTextOptions</a></li><li><a href="global.html#setTitle">setTitle</a></li><li><a href="global.html#setType">setType</a></li><li><a href="global.html#setVal">setVal</a></li><li><a href="global.html#setVals">setVals</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#sortByCol">sortByCol</a></li><li><a href="global.html#sync">sync</a></li><li><a href="global.html#toCSV">toCSV</a></li><li><a href="global.html#toJSON_Array">toJSON_Array</a></li><li><a href="global.html#toJSON_KeyValuePairs">toJSON_KeyValuePairs</a></li><li><a href="global.html#unfilter">unfilter</a></li><li><a href="global.html#unhideRows">unhideRows</a></li><li><a href="global.html#valid_boolean_types">valid_boolean_types</a></li><li><a href="global.html#valid_data_types">valid_data_types</a></li><li><a href="global.html#valid_number_types">valid_number_types</a></li><li><a href="global.html#valid_string_types">valid_string_types</a></li><li><a href="global.html#validate">validate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
     Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a>
-     on 22/11/2022
+     on 25/3/2023
 </footer>
 
 <script> prettyPrint(); </script>
