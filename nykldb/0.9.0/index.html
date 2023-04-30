@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>NyklDB Docs Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="../../styles/main.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3>nykldb 0.9.0</h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1><img src="nykldb-logo.png" alt="N" id="nykldb-logo">yklDB Documentation</h1>
+<h4>NyklDB Version 0.9.0</h4>
+<h5>April 28, 2023</h5>
+<p>NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a <a href="#database-structure">table-like structure</a>, with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB.</p>
+<p>It is designed to be fast, scaleable and easy to use. NyklDB contains a <a href="#search">basic search engine</a> that allows you to perform complex searches, and it can execute mathimatical, boolean, and text based <a href="#formulas">formulas</a> to preform transformations and calculations on your data.</p>
+<p>NyklDB data is also <a href="#sort-shuffle-and-filter">sortable, filterable</a>, <a href="#sync-and-share">syncable and shareable</a>. All data inputs are <a href="#data-validation">validated</a> according to <a href="#types">data type</a>, and data can be <a href="#importing-data">imported</a> or exported as JSON documents.</p>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a>
+<ul>
+<li><a href="#database-structure">Database Structure</a></li>
+</ul>
+</li>
+<li><a href="#features">Features</a>
+<ul>
+<li><a href="#sort-shuffle-and-filter">Sort, Shuffle and Filter</a></li>
+<li><a href="#search">Search</a></li>
+<li><a href="#search-suggestions">Search Suggestions</a></li>
+<li><a href="#sync-and-share">Sync and Share</a></li>
+<li><a href="#data-validation">Data Validation</a></li>
+<li><a href="#formulas">Formulas</a></li>
+</ul>
+</li>
+<li><a href="#types">Types</a>
+<ul>
+<li><a href="#string-types">String Types</a></li>
+<li><a href="#numeric-types">Numeric Types</a></li>
+<li><a href="#boolean-types">Boolean Types</a></li>
+</ul>
+</li>
+<li><a href="#getting-started">Getting Started</a>
+<ul>
+<li><a href="#javascript-installation">JavaScript Installation</a></li>
+<li><a href="#setting-up-a-new-nykldb-object">Setting up a new NyklDB Object</a></li>
+<li><a href="#the-options-parameter">The Options Parameter</a>
+<ul>
+<li><a href="#importing-data">Importing Data</a></li>
+<li><a href="#custom-properties">Custom Properties</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#dependencies">Dependencies</a></li>
+</ul>
+<h1><a id="overview"></a> Overview</h1>
+<p>Nykl (pronounced <em>nickle</em>) comes from a Swedish word, <em>nyckel</em>, which means <em>key</em>.</p>
+<p>NyklDB is a client-side document-oriented data store with data type validation.</p>
+<p>What does that mean?</p>
+<ul>
+<li>
+<p>Client-side: NyklDB runs in a web browser, not on a server.</p>
+</li>
+<li>
+<p>Document-oriented: Rather than having one &quot;single source of truth&quot; on a server, with NyklDB you may have a copy of your data on your phone, on your PC, and another copy on your friend's PC, etc. When you want to update one copy from another copy, you simply <a href="#sync-and-share"><em>synchronize</em></a> them. This enables you to use your data offline, and synchronize it when you connect again. NyklDB uses the JSON file format to exchange data.</p>
+</li>
+<li>
+<p>Data type validation: NyklDB ensures that data that you write to it is correct before it gets written, according
+to the <a href="#types"><em>type</em></a> of data that you specified. This helps to elliminate or correct many common input mistakes, and takes care of much of your form validation work for you, such as for names, email addresses and phone numbers.</p>
+</li>
+</ul>
+<h3><a id="structure"></a> Database Structure</h3>
+<p>Unlike many document-oriented databases, NyklDB follows a very strict data structure. NyklDB can be visualized as having a table-like structure (Figure 1), with table headers, columns and rows, although
+the actual data is written in JSON (Figure 2).</p>
+<p><em>Figure 1: Imagine NyklDB as having a table-like structure</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">COLUMN 0</th>
+<th>COLUMN 1</th>
+<th>COLUMN 2</th>
+<th>COLUMN 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>HEADERS</strong></td>
+<td style="text-align:center"><strong>id</strong></td>
+<td><strong>Name</strong></td>
+<td><strong>Age</strong></td>
+<td><strong>Is Awesome</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>TYPES</strong></td>
+<td style="text-align:center"><strong>uniqueString</strong></td>
+<td><strong>string</strong></td>
+<td><strong>number</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>ROW 0</strong></td>
+<td style="text-align:center"><strong>aaa</strong></td>
+<td>Bob</td>
+<td>42</td>
+<td>false</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>ROW 1</strong></td>
+<td style="text-align:center"><strong>aab</strong></td>
+<td>Jill</td>
+<td>21</td>
+<td>true</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>ROW 2</strong></td>
+<td style="text-align:center"><strong>aac</strong></td>
+<td>Anne</td>
+<td>88</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<p><em>Figure 2: What a NyklDB table really looks like</em></p>
+<pre class="prettyprint source lang-javascript"><code>{
+    title: &quot;Table Name&quot;,
+    created: 1234567,
+    lastModified: 1234567,
+    version: &quot;0.8.0_1.2&quot;,
+    ids: {
+        aaa: [/* lastModified info */],
+        aab: [/* lastModified info */],
+        aac: [/* lastModified info */]
+    },
+    columns: {
+        headers: [&quot;id&quot;, &quot;Name&quot;, &quot;Age&quot;, &quot;Is_Awesome&quot;],
+        meta: {/* column metadata */}
+    },
+    table: [
+        [&quot;aaa&quot;, &quot;Bob&quot;, 42, false],
+        [&quot;aab&quot;, &quot;Jill&quot;, 21, true],
+        [&quot;aac&quot;, &quot;Anne&quot;, 88, true]
+    ],
+    properties: {/* custom properties */}
+}
+
+</code></pre>
+<p>NyklDB stores data temporarily in the browser using indexed-db.
+For more persistant storage, you can export the data from NyklDB as a JSON file and send it to your own cloud
+solution. Synchronisation is handled client-side when you import that JSON file back into NyklDB.</p>
+<p>LZString compression is used so you can fit many MB of data in the very limited indexed-db space that some
+browsers allow, and reduce bandwidth if you are uploading it to a cloud service provider.</p>
+<h1><a id="features"></a> Features</h1>
+<p>Other than the basic read/write functionality that would be expected in any type of data storage solution, NyklDB
+also contains the following features:</p>
+<h3><a id="sort-shuffle-and-filter"></a> Sort, Shuffle and Filter</h3>
+<p>Like a table, data can be sorted alphabetically/numerically by any column in the table, or conversely, shuffled to
+be completely random – useful if you want to create a playlist, or stack of flashcards.</p>
+<p>The table can also be filtered by column, based on matching a given regular expression.</p>
+<h3><a id="search"></a> Search</h3>
+<p>NyklDB contains a basic search engine. Data is search indexed for fast search results based on whole, and multiple
+words, returning results in order of best match.
+Complex searches can be created with the + and - operators, which correspond to AND and NOT respectively.
+Fuzzy matching can be used in some cases to return near matches, for example, common names or spelling mistakes.</p>
+<p>You can add your own &quot;dictionary&quot; JSON file to refine your search experience. For example:</p>
+<blockquote>
+<pre class="prettyprint source lang-javascript"><code>{ 
+  &quot;searchterm&quot;: [&quot;equivelent searchterm&quot;, &quot;another one&quot;],
+  &quot;something&quot;: [&quot;something else&quot;]
+
+}
+</code></pre>
+<p>In this case if you searched for <code>searchterm</code>, you would instead get the search results for <code>equivelent searchterm</code> and <code>another one</code>. If you searched for <code>something</code>, you would get search results for <code>something else</code>.</p>
+</blockquote>
+<p>All searches are case insensitive; searches are done in lowercase only, therefore the dictionary file need only be
+in lowercase.</p>
+<h3><a id="search-suggestions"></a> Search Suggestions</h3>
+<p>NyklDB can aid, or hint to a user what they might be able to search for by returning search suggestions based on
+partial word matches. This is surprisingly fast and can be used to create an as-you-type experience to fill in a
+search box and/or the dropdown list under the search box. Recent successful searches are cached and returned at the
+top of the next search suggestion, giving you search history as well (though this cache isn't saved anywhere so will
+be gone the next time you access the app or webpage).</p>
+<h3><a id="sync-and-share"></a>Sync and Share</h3>
+<p>Data can be exported as a JSON file which can be saved or transferred somewhere and reimported without worrying
+about overwriting more recent data because all data (in every single cell) is stored with accompanying LastModified
+attributes.</p>
+<p>This means that data can be synchronized between local storage and cloud storage, devices, or even people.
+Conflict resolution follows the assumption that the most recent data in each cell is the data that you want to keep.</p>
+<p>Sharing data securely based on a Diffie-Hellman key exchange system coming soon...</p>
+<h3><a id="data-validation"></a> Data Validation</h3>
+<p>Data that you input into a NyklDB object is validated before it is saved, at a minimum, by verifying that it is
+either a String, Number, or Boolean value. All data <em>must</em> fall into one of these three categories. Other types of
+data, such as JavaScript Objects, Arrays or the values 'null' and 'undefined' are not allowed in a NyklDB and will
+throw an error.</p>
+<p>Within these 3 general types of data are many more subtypes. Additional data validation, and sometimes error
+correction can be done by specifying a subtype, i.e. streetAddress is a subtype of String. Some subtypes fall into
+more than one category such as <em>postalZipCode</em> which can be a String or a Number. <a href="#types">See Types below</a> for a
+complete list of all the different subtypes.</p>
+<p>If you want the most flexibility you can specify <em>any</em>, which will allow any type of data to be saved to that column
+in the table, as long as it is a String, Number or Boolean value (though there is no additional validation).</p>
+<p>The data type for each column in the table is best specified when the table is created, but in some cases can be
+changed afterwards, if it doesn't cause a conflict with the existing data in the table.</p>
+<h3><a id="formulas"></a> Formulas</h3>
+<p>You can set a formula on a particular column to pre-calculate its values. Formulas are one line expressions that
+follow the following rules:</p>
+<ul>
+<li>Start with a function name, followed by parentheses</li>
+<li>Put function parameters inside the parentheses, separated by commas</li>
+<li>Parameters inside (single or double) quotes are literal values</li>
+<li>Parameters without quotes starting with a $ refer to a custom property name</li>
+<li>Parameters without quotes with no $ refer to a column name</li>
+<li>Dots join functions together</li>
+<li>Literal values (in quotes) which contain a quote symbol (a ' or a &quot;) can be 'escaped' by placing a backslash before it, so this is OK in single quotes: <code>'He said, &quot;How\'s it goin\'?&quot;'</code> or like this in double <code>&quot;He said, \&quot;How's it goin'?\&quot;&quot;</code></li>
+</ul>
+<blockquote>
+<p>Example: <code>GET_VALUE(LastName).TO_UPPERCASE().JOIN(&quot;, &quot;, FirstName, &quot; &quot;, MiddleName).TRIM()</code>
+gets the value in column 'LastName', converts it to ALL CAPS, joins it with a &quot;, &quot; (comma space), the value in column
+'FirstName', &quot; &quot; (space), the value in column 'MiddleName', and then trims out any extra spaces to build something like
+<code>SMITH, William John</code></p>
+</blockquote>
+<p>Available functions include:</p>
+<table>
+<thead>
+<tr>
+<th>Function Name</th>
+<th>Alternate Names</th>
+<th>Description</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADD</td>
+<td>PLUS</td>
+<td>Add 2 numbers together</td>
+<td>Num1, Num2</td>
+</tr>
+<tr>
+<td>DIVIDE</td>
+<td></td>
+<td>Divide Num1 by Num2</td>
+<td>Num1, Num2</td>
+</tr>
+<tr>
+<td>GET_VALUE</td>
+<td>VALUE, VAL</td>
+<td>Retrieve a value</td>
+<td>ColName or $PropName</td>
+</tr>
+<tr>
+<td>HAS_VALUE</td>
+<td>IS_NOT_EMPTY</td>
+<td>Check whether a value has been assigned</td>
+<td>ColName or $PropName</td>
+</tr>
+<tr>
+<td>IF</td>
+<td></td>
+<td>Check whether a condition is true</td>
+<td>Condition, if_True, if_False</td>
+</tr>
+<tr>
+<td>IS_BOOLEAN</td>
+<td></td>
+<td>Check if a value is a true or false (boolean) value</td>
+<td>Value</td>
+</tr>
+<tr>
+<td>IS_EQUAL</td>
+<td></td>
+<td>Check if 2 values are the same</td>
+<td>Value1, Value2</td>
+</tr>
+<tr>
+<td>IS_GREATER_THAN</td>
+<td>IS_GT</td>
+<td>Check if Num1 is greater than Num2</td>
+<td>Num1, Num2</td>
+</tr>
+<tr>
+<td>IS_LESS_THAN</td>
+<td>IS_LT</td>
+<td>Check if Num1 is less than Num2</td>
+<td>Num1, Num2</td>
+</tr>
+<tr>
+<td>IS_NUMBER</td>
+<td>IS_NUM</td>
+<td>Check if a value is a number</td>
+<td>ColName or $PropName</td>
+</tr>
+<tr>
+<td>IS_STRING</td>
+<td>IS_STR, IS_TEXT</td>
+<td>Check if a value is a text value</td>
+<td>ColName or $PropName</td>
+</tr>
+<tr>
+<td>JOIN</td>
+<td></td>
+<td>Join text values together</td>
+<td>Any # of ColNames, $PropNames or &quot;text&quot;</td>
+</tr>
+<tr>
+<td>MINUS</td>
+<td>SUBTRACT</td>
+<td>Subtract Num2 from Num1</td>
+<td>Num1, Num2</td>
+</tr>
+<tr>
+<td>MULTIPLY</td>
+<td>TIMES</td>
+<td>Multply Num1 by Num2</td>
+<td>Num1, Num2</td>
+</tr>
+<tr>
+<td>TO_LOWERCASE</td>
+<td>TO_LOWER, TO_LC</td>
+<td>Convert text to lowercase letters</td>
+<td></td>
+</tr>
+<tr>
+<td>TO_TITLECASE</td>
+<td>TO_TITLE, TO_TC</td>
+<td>Capitalise text</td>
+<td></td>
+</tr>
+<tr>
+<td>TO_UPPERCASE</td>
+<td>TO_UPPER, TO_UC</td>
+<td>Convert text to all uppercase letters</td>
+<td></td>
+</tr>
+<tr>
+<td>TRIM</td>
+<td></td>
+<td>Remove extra spaces from text</td>
+<td></td>
+</tr>
+<tr>
+<td>More to come....</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1><a id="types"></a> Types</h1>
+<p>The type of data that a column expects can be specified when creating a new table or adding a new column to a table.
+Any data that you try to set on a cell will be first validated according to what type of data the column accepts.
+In some cases the data will be coerced into fitting into the column type, for example converting the string value
+&quot;4&quot; into the number 4, or an error will be returned.</p>
+<p>Some of the types are actually validated exactly the same, for example <strong>string</strong> and <strong>multilineString</strong>, but you
+can use a specific type to indicate what sort of input field to provide to the user for that particular value. A
+<strong>string</strong> value might use a basic <code>input</code> of <code>type=&quot;text&quot;</code>, whereas a <strong>multilineString</strong> may work better as a
+<code>textarea</code> element. Likewise a <strong>color</strong> type would work good with a <code>input</code> of <code>type=&quot;color&quot;</code> and <strong>date</strong> with a
+<code>type=&quot;date&quot;</code> input.</p>
+<p>The following types can be specified:</p>
+<h3><a id="string-types"></a>String Types</h3>
+<ul>
+<li><strong>any</strong> is the default type if no type is specified. Use it if you want to accept input data that could be String, Number, or Boolean values</li>
+<li><strong>cityCounty</strong> for a county, city or town name</li>
+<li><strong>color</strong> a hex or rgba color string</li>
+<li><strong>country</strong> for a country or nation</li>
+<li><strong>email</strong> verifies that the value could be a valid email address</li>
+<li><strong>familyName</strong> for a last name</li>
+<li><strong>formattedAddress</strong> for full home/mail address</li>
+<li><strong>geoLocation</strong> for complete formatted GPS position in decimal coordinates</li>
+<li><strong>givenName</strong> for a first or middle name</li>
+<li><strong>icon</strong> an icon class name</li>
+<li><strong>mailAddress</strong> checks that a string contains both letters and numbers, and corrects some common mailing address input errors</li>
+<li><strong>multilineString</strong> accepts text with carriage returns</li>
+<li><strong>password</strong> checks for password strength and that it follows character use requirements, then saves a salted SHA256 hash of the password. Retrieval of the password requires that the original password be given and only returns true or false depending on whether they match.</li>
+<li><strong>phoneNumber</strong> verifies that the value could be a valid local or long distance phone number, and formats it accordingly</li>
+<li><strong>postalZipCode</strong> verifies that the value could be a Canadian postalCode, or American zipCode</li>
+<li><strong>provinceStateRegion</strong> for a province, state or region</li>
+<li><strong>streetAddress</strong> checks that a string contains both letters and numbers, and corrects some common address input errors</li>
+<li><strong>string</strong> accepts any text value</li>
+<li><strong>textSelect</strong> use with textOptions column option to set the specific text to accept</li>
+<li><strong>textSuggest</strong> use with textOptions column option to set the specific text to suggest</li>
+<li><strong>uniqueString</strong> can be used for things like ids or usernames. It wont accept a value if it already exists in that column of the table.</li>
+<li><strong>url</strong> for a web address</li>
+</ul>
+<h3><a id="numeric-types"></a> Numeric Types</h3>
+<ul>
+<li><strong>any</strong> see <a href="#string-types">String types: any</a></li>
+<li><strong>date</strong> for brevity, stores dates as the number of milliseconds since the database creation. Retrieved values are returned in UNIX time - the number of milliseconds since 00:00:00 Jan 1, 1970 UTC</li>
+<li><strong>integer</strong> checks that it is a number, and rounds numbers to the nearest integer value</li>
+<li><strong>latitude</strong> checks that it is a valid latitudinal decimal coordinate</li>
+<li><strong>longitude</strong> checks that it is a valid longitudinal decimal coordinate</li>
+<li><strong>negInteger</strong> checks that it is a negative number, including 0, and rounds to the nearest integer value</li>
+<li><strong>number</strong> accepts any numeric value, whether positive, negative, or decimal, up to the JavaScript physical size limit</li>
+<li><strong>password</strong> see <a href="#string-types">String types: password</a></li>
+<li><strong>phoneNumber</strong> see <a href="#string-types">String types: phoneNumber</a></li>
+<li><strong>posInteger</strong> checks that is a positive number, including 0, and rounds to the nearest integer value</li>
+<li><strong>postalZipCode</strong> see <a href="#string-types">String types: postalZipCode</a></li>
+<li><strong>range</strong> accepts a number between 2 given values. Set rangeMin and rangeMax on the column options to use range</li>
+</ul>
+<h3><a id="boolean-types"></a> Boolean Types</h3>
+<ul>
+<li><strong>any</strong> see <a href="#string-types">String types: any</a></li>
+<li><strong>boolean</strong> accepts only true or false</li>
+<li><strong>checkbox</strong> accepts only true or false</li>
+</ul>
+<blockquote>
+<p>Note: not all types listed are currently fully implementated in this Beta version, specifically uniqueString, password, country, integer, posInteger, negInteger, url, range, and date</p>
+</blockquote>
+<h1><a id="getting-started"></a> Getting Started</h1>
+<p>The data store can run along side your other JavaScript code by adding a &lt;script&gt; tag directly to your HTML
+document, include it as a Javascript module, or run it in a background task in a Web Worker (which is recommended).</p>
+<h3><a id="javascript-installation"></a> JavaScript Installation</h3>
+<p>To start using NyklDB using JavaSript, download a copy of <code>nyklDB.min.js</code>, <code>base64.min.js</code>, <code>storage.js</code>, <code>Lawnchair.js</code>, and the Lawnchair adaptors that you want to use (<code>dom.js</code>, <code>indexed-db.js</code> for starters), and insert them into your html file with script tags, loading them in this order:</p>
+<pre class="prettyprint source lang-html"><code>    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/base64.min.js&quot;>&lt;/script>
+    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/Lawnchair.js&quot;>&lt;/script>
+    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/adapters/indexed-db.js&quot;>&lt;/script>
+    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/adapters/dom.js&quot;>&lt;/script>
+    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/storage.js&quot;>&lt;/script>
+    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/nyklDB.min.js&quot;>&lt;/script>
+</code></pre>
+<h3><a id="setting-up-a-new-nykldb-object"></a> Setting up a new NyklDB Object</h3>
+<p>Setting up a new NyklDB object is as simple as calling the constructor using the &quot;new&quot; keyword and giving it a
+unique app ID, and a title. The app ID can be the name of the app or any other identifier to distinguish between
+other web apps that could be distributed from the same web domain. The title identifies this particular NyklDB
+data store. After the NyklDB data store is created, initialize it by calling the &quot;init&quot; function and passing it
+the required table &quot;headers&quot; parameter. Optional &quot;customProperties&quot; and &quot;importData&quot; can also be
+passed to the table on setup. A callback function can return a boolean value indicating whether or not the NyklDB
+data store was successfully created and initiated, and any error messages. Inside the callback function, 'this'
+refers to the NyklDB instance.</p>
+<blockquote>
+<p><a href="https://ggoodkey.github.io/nykldb/0.9.0/NyklDB.html">See more details about the NyklDB class</a></p>
+</blockquote>
+<pre class="prettyprint source lang-javascript"><code>var appId = &quot;Company App&quot;, //new in version 0.7.0
+    title = &quot;Accounting Spreadsheet&quot;,
+    headers = [
+        { name: &quot;Month&quot;, type: &quot;string&quot;}, 
+        { name: &quot;Monthly Income&quot;, type: &quot;posInteger&quot; }, 
+        { name: &quot;Monthly Expenses&quot;, type: &quot;negInteger&quot; },
+        { name: &quot;Balance&quot;, type: &quot;integer&quot;}
+    ],
+    options = {
+        //see 'The Options Parameter' below
+    },
+    callback = function (success, errors) { 
+        if (success) {
+            console.log(this.getTitle()); //returns &quot;Accounting Spreadsheet&quot;
+            //update UI to show newly created NyklDB here
+        } else console.log(errors);
+};
+var myTable = new APP.NyklDB(appId, title);
+myTable.init(headers, options, callback);
+myTable.getLength(); //returns 0
+</code></pre>
+<p>For each column header, column &quot;name&quot; and data &quot;type&quot; are required, as shown above, but additional metadata can also be included such as whether a column should be indexed for searching, what it's initial value should be if nothing is specified, or even a <a href="#formulas">formula</a>, like this:</p>
+<pre class="prettyprint source lang-javascript"><code>var headers = [
+    {
+        name: &quot;Month&quot;,
+        type: &quot;string&quot;, 
+        search: true,
+        initialValue: &quot;January&quot;
+    },
+    {
+        name: &quot;Monthly Income&quot;,
+        type: &quot;posInteger&quot;,
+        search: false,
+        initialValue: 2000
+    },
+    {
+        name: &quot;Monthly Expenses&quot;,
+        type: &quot;negInteger&quot;,
+        search: false
+    },
+    {
+        name: &quot;Balance&quot;,
+        type: &quot;integer&quot;,
+        formula: &quot;SUBTRACT('Monthly Income','Monthly Expenses')&quot;
+    }
+]
+</code></pre>
+<h3><a id="the-options-parameter"></a> The Options Parameter</h3>
+<p>The 'options' parameter accepts an Object. It may contain data to import immediately after the database is created
+in the form of a CSV file (string), or JSON object, and custom properties that you would like to add to your table.</p>
+<pre class="prettyprint source lang-javascript"><code>var options = {
+    &quot;importData&quot;: nyklDBTable,
+    &quot;importJSON&quot;: json,
+    &quot;importCSV&quot;: string,
+    &quot;customProperties&quot;: {
+        &quot;FinalBalance&quot;: {
+            &quot;type&quot;: &quot;number&quot;,
+            &quot;initialValue&quot;: 10000
+        },
+        &quot;ICanBuyMyGroceriesThisMonth&quot;: {
+            &quot;type&quot;: &quot;boolean&quot;,
+            &quot;initialValue&quot;: true
+        }
+    }	
+};
+</code></pre>
+<h5><a id="importing-data"></a> Importing Data</h5>
+<p>CSV, or JSON data can be imported into the table in the 'options' parameter in one of 3 forms:</p>
+<pre class="prettyprint source lang-javascript"><code>//table data that was generated by NyklDB sync or exportJSON functions
+&quot;importData&quot;: nyklDBTable, 
+
+//json data that needs to be parsed
+&quot;importJSON&quot;: json, 
+
+//or CSV data that needs to be converted to JSON and then parsed
+&quot;importCSV&quot;: string, 
+</code></pre>
+<h5><a id="custom-properties"></a> Custom Properties</h5>
+<p>Custom properties can be used for data that doesn't quite fit into the &quot;table&quot; model, such as maybe some metadata
+that applies to the entire database. The existence of a custom property must be initiated when the NyklDB object
+is created, and must be given an initial value. Just like table columns, custom properties can be given a data type
+as well, or they will default to the type <code>&quot;any&quot;</code>.</p>
+<pre class="prettyprint source lang-javascript"><code>customProperties:{
+    //name the custom property what ever you want
+    &quot;FinalBalance&quot;: {
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;initialValue&quot;: 10000
+    },
+    &quot;ICanBuyMyGroceriesThisMonth&quot;: {
+        &quot;type&quot;: &quot;boolean&quot;,
+        &quot;initialValue&quot;: true
+    }
+}	
+</code></pre>
+<h1><a id="dependencies"></a> Dependencies</h1>
+<ul>
+<li>base64.js</li>
+<li>storage.js</li>
+<li>Lawnchair.js</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="NyklDB.html">NyklDB</a></li></ul><h3>Global</h3><ul><li><a href="global.html#NUKEALL">NUKEALL</a></li><li><a href="global.html#addColumn">addColumn</a></li><li><a href="global.html#addRow">addRow</a></li><li><a href="global.html#advancedSearch">advancedSearch</a></li><li><a href="global.html#deleteColumn">deleteColumn</a></li><li><a href="global.html#deleteRow">deleteRow</a></li><li><a href="global.html#deleteTable">deleteTable</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#forEachCol">forEachCol</a></li><li><a href="global.html#forEachRow">forEachRow</a></li><li><a href="global.html#getFormula">getFormula</a></li><li><a href="global.html#getHeaders">getHeaders</a></li><li><a href="global.html#getIndexOf">getIndexOf</a></li><li><a href="global.html#getLastModified">getLastModified</a></li><li><a href="global.html#getLength">getLength</a></li><li><a href="global.html#getProp">getProp</a></li><li><a href="global.html#getProps">getProps</a></li><li><a href="global.html#getRange">getRange</a></li><li><a href="global.html#getRow">getRow</a></li><li><a href="global.html#getRowTemplate">getRowTemplate</a></li><li><a href="global.html#getSearchSuggestions">getSearchSuggestions</a></li><li><a href="global.html#getSearchableColumns">getSearchableColumns</a></li><li><a href="global.html#getTextOptions">getTextOptions</a></li><li><a href="global.html#getTitle">getTitle</a></li><li><a href="global.html#getTitles">getTitles</a></li><li><a href="global.html#getType">getType</a></li><li><a href="global.html#getTypes">getTypes</a></li><li><a href="global.html#getVal">getVal</a></li><li><a href="global.html#getVals">getVals</a></li><li><a href="global.html#hideRow">hideRow</a></li><li><a href="global.html#importJSON">importJSON</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isDeleted">isDeleted</a></li><li><a href="global.html#isSyncPending">isSyncPending</a></li><li><a href="global.html#renameColumn">renameColumn</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setFormula">setFormula</a></li><li><a href="global.html#setProp">setProp</a></li><li><a href="global.html#setRange">setRange</a></li><li><a href="global.html#setRowVals">setRowVals</a></li><li><a href="global.html#setSearchable">setSearchable</a></li><li><a href="global.html#setSyncCompleted">setSyncCompleted</a></li><li><a href="global.html#setTableVals">setTableVals</a></li><li><a href="global.html#setTextOptions">setTextOptions</a></li><li><a href="global.html#setTitle">setTitle</a></li><li><a href="global.html#setType">setType</a></li><li><a href="global.html#setVal">setVal</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#sortByCol">sortByCol</a></li><li><a href="global.html#sync">sync</a></li><li><a href="global.html#toCSV">toCSV</a></li><li><a href="global.html#toJSON_Array">toJSON_Array</a></li><li><a href="global.html#toJSON_KeyValuePairs">toJSON_KeyValuePairs</a></li><li><a href="global.html#unfilter">unfilter</a></li><li><a href="global.html#unhideRows">unhideRows</a></li><li><a href="global.html#valid_boolean_types">valid_boolean_types</a></li><li><a href="global.html#valid_data_types">valid_data_types</a></li><li><a href="global.html#valid_number_types">valid_number_types</a></li><li><a href="global.html#valid_string_types">valid_string_types</a></li><li><a href="global.html#validate">validate</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a>
+     on 28/4/2023
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

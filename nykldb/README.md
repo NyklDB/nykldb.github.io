@@ -1,18 +1,19 @@
-# <img src="nykldb-logo.png" alt="N" id="nykldb-logo">yckelDB Documentation
+# <img src="nykldb-logo.png" alt="N" id="nykldb-logo">yklDB Documentation
 
 #### NyklDB Version 0.9.0
 
 ##### April 28, 2023
 
-NyklDB is a table structured, document-oriented database that stores data as JSON documents. Any data that you can visualize as a table or spreadsheet can 
-be stored in a NyklDB object. NyklDB data is [sortable, filterable](#sort-shuffle-and-filter), 
-[searchable](#search), [syncable and shareable](#sync-and-share). All data inputs are [validated](#data-validation) 
-according to [data type](#types), and data can be [imported](#importing-data) or exported as JSON or CSV (coming 
-soon).
+NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a [table-like structure](#database-structure), with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB. 
+
+It is designed to be fast, scaleable and easy to use. NyklDB contains a [basic search engine](#search) that allows you to perform complex searches, and it can execute mathimatical, boolean, and text based [formulas](#formulas) to preform transformations and calculations on your data.
+
+NyklDB data is also [sortable, filterable](#sort-shuffle-and-filter), [syncable and shareable](#sync-and-share). All data inputs are [validated](#data-validation) according to [data type](#types), and data can be [imported](#importing-data) or exported as JSON documents.
 
 ## Table of Contents
 
 * [Overview](#overview)
+  * [Database Structure](#database-structure)
 * [Features](#features)
   * [Sort, Shuffle and Filter](#sort-shuffle-and-filter)
   * [Search](#search)
@@ -21,10 +22,11 @@ soon).
   * [Data Validation](#data-validation)
   * [Formulas](#formulas)
 * [Types](#types)
-  * [String types](#string-types)
-  * [Numeric types](#numeric-types)
-  * [Boolean types](#boolean-types)
+  * [String Types](#string-types)
+  * [Numeric Types](#numeric-types)
+  * [Boolean Types](#boolean-types)
 * [Getting Started](#getting-started)
+  * [JavaScript Installation](#javascript-installation)
   * [Setting up a new NyklDB Object](#setting-up-a-new-nykldb-object)
   * [The Options Parameter](#the-options-parameter)
     * [Importing Data](#importing-data)
@@ -33,27 +35,25 @@ soon).
 
 # <a id="overview"></a> Overview
 
-Nykl (nick-ale) is a Swedish word that means "key".
+Nykl (pronounced *nickle*) comes from a Swedish word, *nyckel*, which means *key*.
 
-The basic concept of NyklDB is to create a portable JavaScript client-side data store with data type validation.
+NyklDB is a client-side document-oriented data store with data type validation.
 
 What does that mean?
 
-- Client-side: Because NyklDB is written in JavaScript (Typescript actually, and transpiled to JavaScript), it 
-runs on your local device in a web browser, not on a server.
+- Client-side: NyklDB runs in a web browser, not on a server.
 
-- Portable: A database historically means a single 'base' for your data, usually on a server. All API calls 
-  reference that <i>single source of truth</i>. However with NyklDB, you may have a copy of your data on your
-  phone, on your PC, and another copy on your friend's PC. When you want to update one copy from another copy, you 
-  simply <i>synchronize</i> them. This enables you to use your data offline, and synchronize it when you connect 
-  again. [See Syncing and sharing your data](#sync-and-share).
+- Document-oriented: Rather than having one "single source of truth" on a server, with NyklDB you may have a copy of your data on your phone, on your PC, and another copy on your friend's PC, etc. When you want to update one copy from another copy, you simply [*synchronize*](#sync-and-share) them. This enables you to use your data offline, and synchronize it when you connect again. NyklDB uses the JSON file format to exchange data.
 
 - Data type validation: NyklDB ensures that data that you write to it is correct before it gets written, according
- to the <i>type</i> of data that you specified. This helps to elliminate or correct many common input mistakes. 
- [See data types](#types).
+ to the [*type*](#types) of data that you specified. This helps to elliminate or correct many common input mistakes, and takes care of much of your form validation work for you, such as for names, email addresses and phone numbers.
 
-NyklDB can be visualized as having a table-like structure (Figure 1), with table headers, and table rows, although 
-the actual structure is JSON (Figure 2).
+### <a id="structure"></a> Database Structure
+
+Unlike many document-oriented databases, NyklDB follows a very strict data structure. NyklDB can be visualized as having a table-like structure (Figure 1), with table headers, columns and rows, although 
+the actual data is written in JSON (Figure 2).
+
+*Figure 1: Imagine NyklDB as having a table-like structure*
 
 |           |COLUMN 0        |COLUMN 1  |COLUMN 2  |COLUMN 3      |
 |:---------:|:--------------:|----------|----------|--------------|
@@ -63,7 +63,7 @@ the actual structure is JSON (Figure 2).
 |**ROW 1**  |**aab**         |Jill      |21        |true          |
 |**ROW 2**  |**aac**         |Anne      |88        |true          |
 
-*Figure 1: Imagine NyklDB as having a table-like structure*
+*Figure 2: What a NyklDB table really looks like*
 
 ```javascript
 {
@@ -89,20 +89,13 @@ the actual structure is JSON (Figure 2).
 }
 
 ``` 
-*Figure 2: What a NyklDB table really looks like*
-
-The data store can run along side your other JavaScript code by adding a \<script\> tag directly to your HTML 
-document, include it as a Javascript module, or run it in a background task in a Web Worker (which is recommended).
 
 NyklDB stores data temporarily in the browser using indexed-db. 
 For more persistant storage, you can export the data from NyklDB as a JSON file and send it to your own cloud 
-solution. Synchronisation is handled client-side when you import that JSON file back into the NyklDB.
+solution. Synchronisation is handled client-side when you import that JSON file back into NyklDB.
 
-LZString compression is used so you can fit many MB of data in the very limited localStorage space that some 
-browsers allow, and reduce bandwidth if uploading to a cloud service provider.
-
-All data written to the data store is automatically validated before being written, taking care of much of your form 
-validation work for you such as names, email addresses and phone numbers. 
+LZString compression is used so you can fit many MB of data in the very limited indexed-db space that some 
+browsers allow, and reduce bandwidth if you are uploading it to a cloud service provider.
 
 # <a id="features"></a> Features
 
@@ -231,7 +224,7 @@ can use a specific type to indicate what sort of input field to provide to the u
 
 The following types can be specified:
 
-### <a id="string-types"></a>String types
+### <a id="string-types"></a>String Types
 
 * **any** is the default type if no type is specified. Use it if you want to accept input data that could be String, Number, or Boolean values
 * **cityCounty** for a county, city or town name
@@ -256,7 +249,7 @@ The following types can be specified:
 * **uniqueString** can be used for things like ids or usernames. It wont accept a value if it already exists in that column of the table.
 * **url** for a web address
 
-### <a id="numeric-types"></a> Numeric types
+### <a id="numeric-types"></a> Numeric Types
 
 * **any** see [String types: any](#string-types)
 * **date** for brevity, stores dates as the number of milliseconds since the database creation. Retrieved values are returned in UNIX time - the number of milliseconds since 00:00:00 Jan 1, 1970 UTC
@@ -271,7 +264,7 @@ The following types can be specified:
 * **postalZipCode** see [String types: postalZipCode](#string-types)
 * **range** accepts a number between 2 given values. Set rangeMin and rangeMax on the column options to use range
 
-### <a id="boolean-types"></a> Boolean types
+### <a id="boolean-types"></a> Boolean Types
 
 * **any** see [String types: any](#string-types)
 * **boolean** accepts only true or false
@@ -279,9 +272,14 @@ The following types can be specified:
 
 > Note: not all types listed are currently fully implementated in this Beta version, specifically uniqueString, password, country, integer, posInteger, negInteger, url, range, and date
 
-# <a id="getting-started"></a> Getting started
+# <a id="getting-started"></a> Getting Started
 
-To start using NyklDB, download a copy of `nyklDB.min.js`, `base64.min.js`, `storage.js`, `Lawnchair.js`, and the Lawnchair adaptors that you want to use (`dom.js`, `indexed-db.js` for starters), and insert them into your html file with script tags, loading them in this order:
+The data store can run along side your other JavaScript code by adding a \<script\> tag directly to your HTML 
+document, include it as a Javascript module, or run it in a background task in a Web Worker (which is recommended).
+
+### <a id="javascript-installation"></a> JavaScript Installation
+
+To start using NyklDB using JavaSript, download a copy of `nyklDB.min.js`, `base64.min.js`, `storage.js`, `Lawnchair.js`, and the Lawnchair adaptors that you want to use (`dom.js`, `indexed-db.js` for starters), and insert them into your html file with script tags, loading them in this order:
 ```html
     <script type="text/javascript" src="scripts/base64.min.js"></script>
     <script type="text/javascript" src="scripts/Lawnchair.js"></script>
@@ -308,7 +306,7 @@ refers to the NyklDB instance.
 var appId = "Company App", //new in version 0.7.0
     title = "Accounting Spreadsheet",
     headers = [
-        { name: "Month", type: "date"}, 
+        { name: "Month", type: "string"}, 
         { name: "Monthly Income", type: "posInteger" }, 
         { name: "Monthly Expenses", type: "negInteger" },
         { name: "Balance", type: "integer"}
@@ -327,8 +325,7 @@ myTable.init(headers, options, callback);
 myTable.getLength(); //returns 0
 ```
 
-Finally, additional metadata can be set such as whether a column should be indexed for searching, what it's initial 
-value should be if nothing is specified, or even a [formula](#formulas), by passing Types in like this:
+For each column header, column "name" and data "type" are required, as shown above, but additional metadata can also be included such as whether a column should be indexed for searching, what it's initial value should be if nothing is specified, or even a [formula](#formulas), like this:
 
 ```javascript
 var headers = [
@@ -367,7 +364,7 @@ var options = {
     "importData": nyklDBTable,
     "importJSON": json,
     "importCSV": string,
-    "customProperties":{
+    "customProperties": {
         "FinalBalance": {
             "type": "number",
             "initialValue": 10000
