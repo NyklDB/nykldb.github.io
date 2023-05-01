@@ -2,39 +2,39 @@
     font-family: 'Open Sans Light';
     font-weight: normal;
     font-style: normal;
-    src: url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.eot');
+    src: url('../nykldb/fonts/OpenSans-Light-webfont.eot');
     src:
         local('Open Sans'),
         local('OpenSans'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.woff') format('woff'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.svg#open_sansregular') format('svg');
+        url('../nykldb/fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../nykldb/fonts/OpenSans-Light-webfont.woff') format('woff'),
+        url('../nykldb/fonts/OpenSans-Light-webfont.svg#open_sansregular') format('svg');
 }
 
 @font-face {
     font-family: 'Open Sans';
     font-weight: normal;
     font-style: normal;
-    src: url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.eot');
+    src: url('../nykldb/fonts/OpenSans-Regular-webfont.eot');
     src:
         local('Open Sans'),
         local('OpenSans'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.woff') format('woff'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+        url('../nykldb/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../nykldb/fonts/OpenSans-Regular-webfont.woff') format('woff'),
+        url('../nykldb/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
 }
 
 @font-face {
     font-family: 'Open Sans';
     font-weight: bold;
     font-style: normal;
-    src: url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.eot');
+    src: url('../nykldb/fonts/OpenSans-Bold-webfont.eot');
     src:
         local('Open Sans'),
         local('OpenSans'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.woff') format('woff'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
+        url('../nykldb/fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../nykldb/fonts/OpenSans-Bold-webfont.woff') format('woff'),
+        url('../nykldb/fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
 }
 
 html {
