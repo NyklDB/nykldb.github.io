@@ -48,7 +48,7 @@ What does that mean?
 - Data type validation: NyklDB ensures that data that you write to it is correct before it gets written, according
  to the [*type*](#types) of data that you specified. This helps to elliminate or correct many common input mistakes, and takes care of much of your form validation work for you, such as for names, email addresses and phone numbers.
 
-### <a id="structure"></a> Database Structure
+### <a id="database-structure"></a> Database Structure
 
 Unlike many document-oriented databases, NyklDB follows a very strict data structure. NyklDB can be visualized as having a table-like structure (Figure 1), with table headers, columns and rows, although 
 the actual data is written in JSON (Figure 2).
