@@ -300,7 +300,7 @@ passed to the table on setup. A callback function can return a boolean value ind
 data store was successfully created and initiated, and any error messages. Inside the callback function, 'this' 
 refers to the NyklDB instance.
 
-> [See more details about the NyklDB class](https://ggoodkey.github.io/nykldb/0.9.0/NyklDB.html)
+> [See more details about the NyklDB class](./0.9.0/NyklDB.html)
 
 ```javascript
 var appId = "Company App", //new in version 0.7.0

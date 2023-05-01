@@ -2,50 +2,50 @@
     font-family: 'Open Sans Light';
     font-weight: normal;
     font-style: normal;
-    src: url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.eot');
+    src: url('./fonts/OpenSans-Light-webfont.eot');
     src:
         local('Open Sans'),
         local('OpenSans'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.woff') format('woff'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Light-webfont.svg#open_sansregular') format('svg');
+        url('./fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/OpenSans-Light-webfont.woff') format('woff'),
+        url('./fonts/OpenSans-Light-webfont.svg#open_sansregular') format('svg');
 }
 
 @font-face {
     font-family: 'Open Sans';
     font-weight: normal;
     font-style: normal;
-    src: url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.eot');
+    src: url('./fonts/OpenSans-Regular-webfont.eot');
     src:
         local('Open Sans'),
         local('OpenSans'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.woff') format('woff'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+        url('./fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/OpenSans-Regular-webfont.woff') format('woff'),
+        url('./fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
 }
 
 @font-face {
     font-family: 'Open Sans';
     font-weight: bold;
     font-style: normal;
-    src: url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.eot');
+    src: url('./fonts/OpenSans-Bold-webfont.eot');
     src:
         local('Open Sans'),
         local('OpenSans'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.woff') format('woff'),
-        url('../nyckeldb/0.8.0/fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
+        url('./fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/OpenSans-Bold-webfont.woff') format('woff'),
+        url('./fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
 }
 
 html {
     overflow: auto;
     background-color: #0b0e17;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 body {
     font-family: 'Open Sans', sans-serif;
-    line-height: 1.5;
+    line-height: 1.8;
     color: #b8bec7;
     background-color: inherit;
     margin: 0;
@@ -128,6 +128,7 @@ nav {
     display: block;
     float: right;
     padding-top: 28px;
+    padding-bottom: 28px;
     width: 200px;
     box-sizing: border-box;
     padding-left: 16px;
@@ -158,11 +159,12 @@ nav ul a:active {
 }
 
 nav h3 {
-    margin-top: 12px;
+    margin-top: 20px;
 }
 
 nav li {
     margin-top: 6px;
+    margin-bottom: 6px;
 }
 
 footer {
@@ -170,11 +172,11 @@ footer {
     padding: 6px;
     margin-top: 12px;
     font-style: italic;
-    font-size: 50%;
+    font-size: 70%;
     position: fixed;
     bottom: 0;
     right: 40px;
-    background-color: none;
+    background-color: transparent;
 }
 
 h1,
