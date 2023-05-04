@@ -292,19 +292,16 @@ To start using NyklDB using JavaSript, download a copy of `nyklDB.min.js`, `base
 ### <a id="setting-up-a-new-nykldb-object"></a> Setting up a new NyklDB Object
 
 Setting up a new NyklDB object is as simple as calling the constructor using the "new" keyword and giving it a 
-unique app ID, and a title. The app ID can be the name of the app or any other identifier to distinguish between 
-other web apps that could be distributed from the same web domain. The title identifies this particular NyklDB 
-data store. After the NyklDB data store is created, initialize it by calling the "init" function and passing it 
-the required table "headers" parameter. Optional "customProperties" and "importData" can also be 
-passed to the table on setup. A callback function can return a boolean value indicating whether or not the NyklDB 
-data store was successfully created and initiated, and any error messages. Inside the callback function, 'this' 
-refers to the NyklDB instance.
+title. The title identifies this particular NyklDB data store. After the NyklDB data store is created, initialize 
+it by calling the "init" function and passing it the required table "headers" parameter. Optional "customProperties" 
+and "importData" can also be passed to the table on setup. A callback function can return a boolean value indicating 
+whether or not the NyklDB data store was successfully created and initiated, and any error messages. Inside the 
+callback function, 'this' refers to the NyklDB instance.
 
-> [See more details about the NyklDB class](./0.9.0/NyklDB.html)
+> [See more details about the NyklDB class](NyklDB.html)
 
 ```javascript
-var appId = "Company App", //new in version 0.7.0
-    title = "Accounting Spreadsheet",
+var title = "Accounting Spreadsheet",
     headers = [
         { name: "Month", type: "string"}, 
         { name: "Monthly Income", type: "posInteger" }, 
@@ -320,7 +317,7 @@ var appId = "Company App", //new in version 0.7.0
             //update UI to show newly created NyklDB here
         } else console.log(errors);
 };
-var myTable = new APP.NyklDB(appId, title);
+var myTable = new APP.NyklDB(title);
 myTable.init(headers, options, callback);
 myTable.getLength(); //returns 0
 ```
