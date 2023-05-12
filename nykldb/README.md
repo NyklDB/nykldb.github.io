@@ -2,7 +2,7 @@
 
 #### NyklDB Version 0.9.0
 
-##### April 28, 2023
+##### May 12, 2023
 
 NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a [table-like structure](#database-structure), with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB. 
 
@@ -55,37 +55,54 @@ the actual data is written in JSON (Figure 2).
 
 *Figure 1: Imagine NyklDB as having a table-like structure*
 
-|           |COLUMN 0        |COLUMN 1  |COLUMN 2  |COLUMN 3      |
-|:---------:|:--------------:|----------|----------|--------------|
-|**HEADERS**|**id**          |**Name**  |**Age**   |**Is Awesome**|
-|**TYPES**  |**uniqueString**|**string**|**number**|**boolean**   |
-|**ROW 0**  |**aaa**         |Bob       |42        |false         |
-|**ROW 1**  |**aab**         |Jill      |21        |true          |
-|**ROW 2**  |**aac**         |Anne      |88        |true          |
+|id  |Name (string)|Age (number)|Is Awesome (boolean)|
+|:--:|-------------|------------|--------------------|
+|AAA |Bob          |42          |false               |
+|AAB |Jill         |21          |true                |
+|AAC |Anne         |88          |true                |
 
 *Figure 2: What a NyklDB table really looks like*
 
-```javascript
+```json
 {
-    title: "Table Name",
-    created: 1234567,
-    lastModified: 1234567,
-    version: "0.8.0_1.2",
-    ids: {
-        aaa: [/* lastModified info */],
-        aab: [/* lastModified info */],
-        aac: [/* lastModified info */]
+    "title": "Table_Name",
+    "created": 3064452,
+    "lastModified": 3064455,
+    "deleted": false,
+    "version": "0.9.0",
+    "ids": { 
+        "AAA": [/* lastModified info */],
+        "AAB": [/* lastModified info */],
+        "AAC": [/* lastModified info */]
     },
-    columns: {
-        headers: ["id", "Name", "Age", "Is_Awesome"],
-        meta: {/* column metadata */}
+    "columns": {
+        "headers": ["id", "Name", "Age", "Is_Awesome"],
+        "meta": {/* column metadata */
+            "Name": {
+                "type": ["string", 0],
+                "timestamp": [0, 0],
+                "searchable": [true, 0],
+                "initialValue": ["", 0]
+            },
+            "Age": {
+                "type": ["number", 0],
+                "timestamp": [0, 0],
+                "initialValue": [0, 0]
+            },
+            "Is_Awesome": {
+                "type": ["boolean", 0],
+                "timestamp": [0, 0],
+                "initialValue": [false, 0],
+                "exportAs": ["Is Awesome", 0]
+            }
+        }
     },
-    table: [
-        ["aaa", "Bob", 42, false],
-        ["aab", "Jill", 21, true],
-        ["aac", "Anne", 88, true]
+    "table": [
+        ["AAA", "Bob", 42, false],
+        ["AAB", "Jill", 21, true],
+        ["AAC", "Anne", 88, true]
     ],
-    properties: {/* custom properties */}
+    "properties": {/* table properties */}
 }
 
 ``` 

@@ -46,7 +46,7 @@
     <section>
         <article><h1><img src="nykldb-logo.png" alt="N" id="nykldb-logo">yklDB Documentation</h1>
 <h4>NyklDB Version 0.9.0</h4>
-<h5>April 28, 2023</h5>
+<h5>May 12, 2023</h5>
 <p>NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a <a href="#database-structure">table-like structure</a>, with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB.</p>
 <p>It is designed to be fast, scaleable and easy to use. NyklDB contains a <a href="#search">basic search engine</a> that allows you to perform complex searches, and it can execute mathimatical, boolean, and text based <a href="#formulas">formulas</a> to preform transformations and calculations on your data.</p>
 <p>NyklDB data is also <a href="#sort-shuffle-and-filter">sortable, filterable</a>, <a href="#sync-and-share">syncable and shareable</a>. All data inputs are <a href="#data-validation">validated</a> according to <a href="#types">data type</a>, and data can be <a href="#importing-data">imported</a> or exported as JSON documents.</p>
@@ -111,45 +111,27 @@ the actual data is written in JSON (Figure 2).</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">COLUMN 0</th>
-<th>COLUMN 1</th>
-<th>COLUMN 2</th>
-<th>COLUMN 3</th>
+<th style="text-align:center">id</th>
+<th>Name (string)</th>
+<th>Age (number)</th>
+<th>Is Awesome (boolean)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><strong>HEADERS</strong></td>
-<td style="text-align:center"><strong>id</strong></td>
-<td><strong>Name</strong></td>
-<td><strong>Age</strong></td>
-<td><strong>Is Awesome</strong></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>TYPES</strong></td>
-<td style="text-align:center"><strong>uniqueString</strong></td>
-<td><strong>string</strong></td>
-<td><strong>number</strong></td>
-<td><strong>boolean</strong></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>ROW 0</strong></td>
-<td style="text-align:center"><strong>aaa</strong></td>
+<td style="text-align:center">AAA</td>
 <td>Bob</td>
 <td>42</td>
 <td>false</td>
 </tr>
 <tr>
-<td style="text-align:center"><strong>ROW 1</strong></td>
-<td style="text-align:center"><strong>aab</strong></td>
+<td style="text-align:center">AAB</td>
 <td>Jill</td>
 <td>21</td>
 <td>true</td>
 </tr>
 <tr>
-<td style="text-align:center"><strong>ROW 2</strong></td>
-<td style="text-align:center"><strong>aac</strong></td>
+<td style="text-align:center">AAC</td>
 <td>Anne</td>
 <td>88</td>
 <td>true</td>
@@ -157,26 +139,45 @@ the actual data is written in JSON (Figure 2).</p>
 </tbody>
 </table>
 <p><em>Figure 2: What a NyklDB table really looks like</em></p>
-<pre class="prettyprint source lang-javascript"><code>{
-    title: &quot;Table Name&quot;,
-    created: 1234567,
-    lastModified: 1234567,
-    version: &quot;0.8.0_1.2&quot;,
-    ids: {
-        aaa: [/* lastModified info */],
-        aab: [/* lastModified info */],
-        aac: [/* lastModified info */]
+<pre class="prettyprint source lang-json"><code>{
+    &quot;title&quot;: &quot;Table_Name&quot;,
+    &quot;created&quot;: 3064452,
+    &quot;lastModified&quot;: 3064455,
+    &quot;deleted&quot;: false,
+    &quot;version&quot;: &quot;0.9.0&quot;,
+    &quot;ids&quot;: { 
+        &quot;AAA&quot;: [/* lastModified info */],
+        &quot;AAB&quot;: [/* lastModified info */],
+        &quot;AAC&quot;: [/* lastModified info */]
     },
-    columns: {
-        headers: [&quot;id&quot;, &quot;Name&quot;, &quot;Age&quot;, &quot;Is_Awesome&quot;],
-        meta: {/* column metadata */}
+    &quot;columns&quot;: {
+        &quot;headers&quot;: [&quot;id&quot;, &quot;Name&quot;, &quot;Age&quot;, &quot;Is_Awesome&quot;],
+        &quot;meta&quot;: {/* column metadata */
+            &quot;Name&quot;: {
+                &quot;type&quot;: [&quot;string&quot;, 0],
+                &quot;timestamp&quot;: [0, 0],
+                &quot;searchable&quot;: [true, 0],
+                &quot;initialValue&quot;: [&quot;&quot;, 0]
+            },
+            &quot;Age&quot;: {
+                &quot;type&quot;: [&quot;number&quot;, 0],
+                &quot;timestamp&quot;: [0, 0],
+                &quot;initialValue&quot;: [0, 0]
+            },
+            &quot;Is_Awesome&quot;: {
+                &quot;type&quot;: [&quot;boolean&quot;, 0],
+                &quot;timestamp&quot;: [0, 0],
+                &quot;initialValue&quot;: [false, 0],
+                &quot;exportAs&quot;: [&quot;Is Awesome&quot;, 0]
+            }
+        }
     },
-    table: [
-        [&quot;aaa&quot;, &quot;Bob&quot;, 42, false],
-        [&quot;aab&quot;, &quot;Jill&quot;, 21, true],
-        [&quot;aac&quot;, &quot;Anne&quot;, 88, true]
+    &quot;table&quot;: [
+        [&quot;AAA&quot;, &quot;Bob&quot;, 42, false],
+        [&quot;AAB&quot;, &quot;Jill&quot;, 21, true],
+        [&quot;AAC&quot;, &quot;Anne&quot;, 88, true]
     ],
-    properties: {/* custom properties */}
+    &quot;properties&quot;: {/* table properties */}
 }
 
 </code></pre>
@@ -571,14 +572,14 @@ as well, or they will default to the type <code>&quot;any&quot;</code>.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="NyklDB.html">NyklDB</a></li></ul><h3>Global</h3><ul><li><a href="global.html#NUKEALL">NUKEALL</a></li><li><a href="global.html#addColumn">addColumn</a></li><li><a href="global.html#addRow">addRow</a></li><li><a href="global.html#advancedSearch">advancedSearch</a></li><li><a href="global.html#deleteColumn">deleteColumn</a></li><li><a href="global.html#deleteRow">deleteRow</a></li><li><a href="global.html#deleteTable">deleteTable</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#forEachCol">forEachCol</a></li><li><a href="global.html#forEachRow">forEachRow</a></li><li><a href="global.html#getFormula">getFormula</a></li><li><a href="global.html#getHeaders">getHeaders</a></li><li><a href="global.html#getIndexOf">getIndexOf</a></li><li><a href="global.html#getLastModified">getLastModified</a></li><li><a href="global.html#getLength">getLength</a></li><li><a href="global.html#getProp">getProp</a></li><li><a href="global.html#getProps">getProps</a></li><li><a href="global.html#getRange">getRange</a></li><li><a href="global.html#getRow">getRow</a></li><li><a href="global.html#getRowTemplate">getRowTemplate</a></li><li><a href="global.html#getSearchSuggestions">getSearchSuggestions</a></li><li><a href="global.html#getSearchableColumns">getSearchableColumns</a></li><li><a href="global.html#getTextOptions">getTextOptions</a></li><li><a href="global.html#getTitle">getTitle</a></li><li><a href="global.html#getTitles">getTitles</a></li><li><a href="global.html#getType">getType</a></li><li><a href="global.html#getTypes">getTypes</a></li><li><a href="global.html#getVal">getVal</a></li><li><a href="global.html#getVals">getVals</a></li><li><a href="global.html#hideRow">hideRow</a></li><li><a href="global.html#importJSON">importJSON</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isDeleted">isDeleted</a></li><li><a href="global.html#isSyncPending">isSyncPending</a></li><li><a href="global.html#renameColumn">renameColumn</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setFormula">setFormula</a></li><li><a href="global.html#setProp">setProp</a></li><li><a href="global.html#setRange">setRange</a></li><li><a href="global.html#setRowVals">setRowVals</a></li><li><a href="global.html#setSearchable">setSearchable</a></li><li><a href="global.html#setSyncCompleted">setSyncCompleted</a></li><li><a href="global.html#setTableVals">setTableVals</a></li><li><a href="global.html#setTextOptions">setTextOptions</a></li><li><a href="global.html#setTitle">setTitle</a></li><li><a href="global.html#setType">setType</a></li><li><a href="global.html#setVal">setVal</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#sortByCol">sortByCol</a></li><li><a href="global.html#sync">sync</a></li><li><a href="global.html#toCSV">toCSV</a></li><li><a href="global.html#toJSON_Array">toJSON_Array</a></li><li><a href="global.html#toJSON_KeyValuePairs">toJSON_KeyValuePairs</a></li><li><a href="global.html#unfilter">unfilter</a></li><li><a href="global.html#unhideRows">unhideRows</a></li><li><a href="global.html#valid_boolean_types">valid_boolean_types</a></li><li><a href="global.html#valid_data_types">valid_data_types</a></li><li><a href="global.html#valid_number_types">valid_number_types</a></li><li><a href="global.html#valid_string_types">valid_string_types</a></li><li><a href="global.html#validate">validate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="NyklDB.html">NyklDB</a></li></ul><h3>Global</h3><ul><li><a href="global.html#valid_boolean_types">valid_boolean_types</a></li><li><a href="global.html#valid_data_types">valid_data_types</a></li><li><a href="global.html#valid_number_types">valid_number_types</a></li><li><a href="global.html#valid_string_types">valid_string_types</a></li><li><a href="global.html#validate">validate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
     Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a>
-     on 4/5/2023
+     on 12/5/2023
 </footer>
 
 <script> prettyPrint(); </script>
