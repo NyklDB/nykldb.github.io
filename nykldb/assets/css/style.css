@@ -1,0 +1,495 @@
+@font-face {
+    font-family: 'Open Sans Light';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/OpenSans-Light-webfont.eot');
+    src:
+        local('Open Sans'),
+        local('OpenSans'),
+        url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
+        url('../fonts/OpenSans-Light-webfont.svg#open_sansregular') format('svg');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/OpenSans-Regular-webfont.eot');
+    src:
+        local('Open Sans'),
+        local('OpenSans'),
+        url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+        url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../fonts/OpenSans-Bold-webfont.eot');
+    src:
+        local('Open Sans'),
+        local('OpenSans'),
+        url('../fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/OpenSans-Bold-webfont.woff') format('woff'),
+        url('../fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
+}
+
+html {
+    overflow: auto;
+    background-color: #0b0e17;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.8;
+    color: #b8bec7;
+    background-color: inherit;
+    margin: 0;
+}
+
+a,
+a:visited,
+a:active {
+    color: #478cdb;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+header {
+    display: block;
+    padding: 0px 4px;
+}
+
+tt,
+code,
+kbd,
+samp {
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    background: #111;
+    padding: 2px;
+    border-radius: 4px;
+    color: #b07d42;
+}
+
+.class-description {
+    font-size: 130%;
+    line-height: 140%;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.class-description:empty {
+    margin: 0;
+}
+
+#main {
+    position: absolute;
+    right: 0;
+    left: 200px;
+    width: inherit;
+}
+
+article dl {
+    margin-bottom: 40px;
+}
+
+article img {
+    max-width: 100%;
+}
+
+section {
+    display: block;
+    background-color: #19202d;
+    padding: 12px 24px;
+    border: 1px solid #274c75;
+    margin-right: 30px;
+    margin-bottom: 24px;
+}
+
+.variation {
+    display: none;
+}
+
+.signature-attributes {
+    font-size: 60%;
+    color: #555;
+    font-style: italic;
+    font-weight: lighter;
+}
+
+nav {
+    display: block;
+    float: right;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    width: 200px;
+    box-sizing: border-box;
+    padding-left: 16px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+    margin-top: 0;
+    border-left: 0px;
+}
+
+nav ul {
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', arial, sans-serif;
+    font-size: 100%;
+    line-height: 17px;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+nav ul a,
+nav ul a:visited,
+nav ul a:active {
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    line-height: 18px;
+    color: #478cdb;
+}
+
+nav h3 {
+    margin-top: 20px;
+}
+
+nav li {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+footer {
+    display: block;
+    padding: 6px;
+    margin-top: 12px;
+    font-style: italic;
+    font-size: 70%;
+    position: fixed;
+    bottom: 0;
+    right: 40px;
+    background-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: normal;
+    margin: 0;
+}
+
+h1 {
+    font-family: 'Open Sans Light', sans-serif;
+    font-size: 48px;
+    letter-spacing: -2px;
+    margin: 12px 0px 20px;
+}
+
+h2,
+h3.subsection-title {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    font-size: 24px;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+}
+
+h4 {
+    font-size: 18px;
+    letter-spacing: -0.33px;
+    margin-bottom: 12px;
+    color: #a8693c;
+    font-weight: bold;
+}
+
+h5,
+.container-overview .subsection-title {
+    font-size: 120%;
+    font-weight: bold;
+    letter-spacing: -0.01em;
+    margin: 8px 0 3px 0;
+}
+
+h6 {
+    font-size: 100%;
+    letter-spacing: -0.01em;
+    margin: 6px 0 3px 0;
+    font-style: italic;
+}
+
+table {
+    border-spacing: 0;
+    border: 0;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    border: 1px solid rgba(39, 76, 117, 0.25);
+    margin: 0px;
+    text-align: left;
+    vertical-align: top;
+    padding: 4px 6px;
+    display: table-cell;
+}
+
+thead tr {
+    background-color: rgba(39, 76, 117, 1);
+    font-weight: bold;
+}
+
+th {
+    border-right: 1px solid rgba(39, 76, 117, 0.25);
+}
+
+tr>th:last-child {
+    border-right: 1px solid rgba(39, 76, 117, 0.25);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(39, 76, 117, 0.25);
+}
+
+.ancestors,
+.attribs {
+    color: #999;
+}
+
+.ancestors a,
+.attribs a {
+    color: #478cdb !important;
+    text-decoration: none;
+}
+
+.clear {
+    clear: both;
+}
+
+.important {
+    font-weight: bold;
+    color: #5f0600;
+}
+
+.yes-def {
+    text-indent: -1000px;
+}
+
+.type-signature {
+    color: #555;
+}
+
+.name,
+.signature {
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+}
+
+.details {
+    margin-top: 14px;
+    border-left: 2px solid #222;
+}
+
+.details dt {
+    width: 120px;
+    float: left;
+    padding-left: 10px;
+    padding-top: 6px;
+}
+
+.details dd {
+    margin-left: 70px;
+}
+
+.details ul {
+    margin: 0;
+}
+
+.details ul {
+    list-style-type: none;
+}
+
+.details li {
+    margin-left: 30px;
+    padding-top: 6px;
+}
+
+.details pre.prettyprint {
+    margin: 0
+}
+
+.details .object-value {
+    padding-top: 0;
+}
+
+.description {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.code-caption {
+    font-style: italic;
+    font-size: 107%;
+    margin: 0;
+}
+
+.prettyprint {
+    border: 1px solid #222;
+    width: 80%;
+    overflow: auto;
+}
+
+.prettyprint.source {
+    width: inherit;
+    background-color: #0b0e17;
+}
+
+.prettyprint code {
+    font-size: 100%;
+    line-height: 18px;
+    display: block;
+    padding: 4px 12px;
+    margin: 0;
+    background-color: #0b0e17;
+    color: #a6a8b4;
+}
+
+.prettyprint code span.line {
+    display: inline-block;
+}
+
+.prettyprint.linenums {
+    padding-left: 70px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.prettyprint.linenums ol {
+    padding-left: 0;
+}
+
+.prettyprint.linenums li {
+    border-left: 3px #222 solid;
+}
+
+.prettyprint.linenums li.selected,
+.prettyprint.linenums li.selected * {
+    background-color: #393933;
+}
+
+.prettyprint.linenums li * {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.params .name,
+.props .name,
+.name code {
+    color: #a6a8b4;
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    font-size: 100%;
+}
+
+.params td.description>p:first-child,
+.props td.description>p:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.params td.description>p:last-child,
+.props td.description>p:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.disabled {
+    color: #5d5d5d;
+}
+
+#nyckeldb-logo {
+    position: relative;
+    top: 4px;
+}
+
+/**/
+@media screen {
+
+    .pun {
+        color: #bbb;
+    }
+
+    .pln {
+        color: #bbb;
+    }
+
+    .com {
+        color: #477a40;
+    }
+
+    .str,
+    .atv {
+        color: #b07d42;
+    }
+
+    .lit {
+        color: #7ea96f;
+    }
+
+    .kwd,
+    .tag {
+        color: #4279b8;
+    }
+
+    .atn {
+        color: #a4c3e7
+    }
+}
+
+@media print {
+    #main {
+        left: 0;
+    }
+
+    nav {
+        display: none;
+    }
+
+    section {
+        margin-right: 0;
+        padding: 0;
+        border: none;
+    }
+
+    footer {
+        display: none;
+    }
+
+    h1:not(:first-child),
+    h3.subsection-title:not(:nth-child(2)) {
+        page-break-before: always;
+    }
+
+    .page-title {
+        display: none;
+    }
+}
