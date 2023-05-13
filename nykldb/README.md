@@ -191,16 +191,20 @@ follow the following rules:
 
 * Start with a function name, followed by parentheses 
 * Put function parameters inside the parentheses, separated by commas
-* Parameters inside (single or double) quotes are literal values
-* Parameters without quotes starting with a $ refer to a custom property name
-* Parameters without quotes with no $ refer to a column name
+* Parameters inside 'single' or "double" quotes are literal values
+* Parameters without quotes, and starting with a $ (dollar sign) refer to a custom property name
+* Parameters without quotes, and with no $ refer to a column name
 * Dots join functions together
-* Literal values (in quotes) which contain a quote symbol (a ' or a ") can be 'escaped' by placing a backslash before it, so this is OK in single quotes: `'He said, "How\'s it goin\'?"'` or like this in double `"He said, \"How's it goin'?\""`
 
-> Example: `GET_VALUE(LastName).TO_UPPERCASE().JOIN(", ", FirstName, " ", MiddleName).TRIM()`
+> ###### Formula example
+> `GET_VALUE(LastName).TO_UPPERCASE().JOIN(", ", FirstName, " ", MiddleName).TRIM()`
 > gets the value in column 'LastName', converts it to ALL CAPS, joins it with a ", " (comma space), the value in column
 > 'FirstName', " " (space), the value in column 'MiddleName', and then trims out any extra spaces to build something like
 > `SMITH, William John`
+
+| Note     |
+|:---------|
+| If a literal value (in quotes) contains an apostrophe or quote symbol, you must preceed it with a backslash, otherwise it will be interpreted as the end of the literal value. So this is OK in single quotes: `'He said, "How\'s it goin\'?"'` or like this in double quotes: `"He said, \"How's it goin'?\""` |
 
 Available functions include:
 
