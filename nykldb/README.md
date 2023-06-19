@@ -191,13 +191,14 @@ follow the following rules:
 
 * Start with a function name, followed by parentheses 
 * Put function parameters inside the parentheses, separated by commas
-* Parameters inside 'single' or "double" quotes are literal values
-* Parameters without quotes, and starting with a $ (dollar sign) refer to a custom property name
-* Parameters without quotes, and with no $ refer to a column name
+* Parameters inside 'single' or "double" quotes are literal text values
+* Parameters without quotes, and starting with a $ (dollar sign) refer to a column name
+* Parameters without quotes, and starting with a # (pound sign) refer to a property name
 * Dots join functions together
+* Functions can also be nested inside other functions
 
 > ###### Formula example
-> `GET_VALUE(LastName).TO_UPPERCASE().JOIN(", ", FirstName, " ", MiddleName).TRIM()`
+> `GET_VALUE($LastName).TO_UPPERCASE().JOIN(", ",$FirstName," ",$MiddleName).TRIM()`
 > gets the value in column 'LastName', converts it to ALL CAPS, joins it with a ", " (comma space), the value in column
 > 'FirstName', " " (space), the value in column 'MiddleName', and then trims out any extra spaces to build something like
 > `SMITH, William John`
@@ -208,26 +209,28 @@ follow the following rules:
 
 Available functions include:
 
-| Function Name		| Alternate Names	| Description						| Parameters
-|-------------------|-------------------|-----------------------------------|------------
-| ADD				| PLUS				| Add 2 numbers together			| Num1, Num2
-| DIVIDE			|					| Divide Num1 by Num2				| Num1, Num2
-| GET_VALUE			| VALUE, VAL		| Retrieve a value					| ColName or $PropName
-| HAS_VALUE			| IS_NOT_EMPTY		| Check whether a value has been assigned| ColName or $PropName
-| IF				|					| Check whether a condition is true	| Condition, if_True, if_False
-| IS_BOOLEAN		|					| Check if a value is a true or false (boolean) value | Value
-| IS_EQUAL			|					| Check if 2 values are the same	| Value1, Value2
-| IS_GREATER_THAN	| IS_GT				| Check if Num1 is greater than Num2 | Num1, Num2
-| IS_LESS_THAN		| IS_LT				| Check if Num1 is less than Num2	| Num1, Num2
-| IS_NUMBER			| IS_NUM			| Check if a value is a number		| ColName or $PropName
-| IS_STRING			| IS_STR, IS_TEXT	| Check if a value is a text value	| ColName or $PropName
-| JOIN				|					| Join text values together 		| Any # of ColNames, $PropNames or "text"
-| MINUS				| SUBTRACT			| Subtract Num2 from Num1			| Num1, Num2
-| MULTIPLY			| TIMES				| Multply Num1 by Num2				| Num1, Num2
-| TO_LOWERCASE		| TO_LOWER, TO_LC	| Convert text to lowercase letters	| 
-| TO_TITLECASE		| TO_TITLE, TO_TC	| Capitalise text					|
-| TO_UPPERCASE		| TO_UPPER, TO_UC	| Convert text to all uppercase letters|
-| TRIM				|					| Remove extra spaces from text		|
+| Function Name		| Alternate Names	| Description						| Parameters                            | Returns
+|-------------------|-------------------|-----------------------------------|---------------------------------------|--------
+| ADD				| PLUS				| Add 2 numbers together			| Num1, Num2                            | Number
+| DIVIDE			|					| Divide Num1 by Num2				| Num1, Num2                            | Number
+| GET_VALUE			| VALUE_OF, VALUE, VAL | Retrieve a value				| $ColName or #PropName                 | Value
+| HAS_VALUE			| IS_NOT_EMPTY		| Check whether a value has been assigned | $ColName or #PropName           | Boolean
+| IF				|					| Check whether a condition is true	| TestFunct, ValueIfTrue, ValueIfFalse  | Value
+| IS_BOOLEAN		|					| Check if a value is a true or false (boolean) value | Value               | Boolean
+| IS_EQUAL			| EQUALS			| Check if 2 values are the same	| Value1, Value2                        | Boolean
+| IS_GREATER_THAN	| IS_GT				| Check if Num1 is greater than Num2 | Num1, Num2                           | Boolean
+| IS_LESS_THAN		| IS_LT				| Check if Num1 is less than Num2	| Num1, Num2                            | Boolean
+| IS_NUMBER			| IS_NUM			| Check if a value is a number		| $ColName or #PropName                 | Boolean
+| IS_STRING			| IS_STR, IS_TEXT	| Check if a value is a text value	| $ColName or #PropName                 | Boolean
+| JOIN				|					| Join text values together 		| Any # of $ColNames, #PropNames or "text" | String
+| MINUS				| SUBTRACT			| Subtract Num2 from Num1			| Num1, Num2                            | Number
+| MULTIPLY			| TIMES				| Multply Num1 by Num2				| Num1, Num2                            | Number
+| TO_NUMBER         | TO_NUM            | Convert value to number           |                                       | Number
+| TO_STRING         | TO_STR, TO_TEXT   | Convert value to text             |                                       | String
+| TO_LOWERCASE		| TO_LOWER, TO_LC	| Convert text to lowercase letters	|                                       | String
+| TO_TITLECASE		| TO_TITLE, TO_TC	| Capitalise text					|                                       | String
+| TO_UPPERCASE		| TO_UPPER, TO_UC	| Convert text to all uppercase letters |                                   | String
+| TRIM				|					| Remove extra spaces from text		|                                       | String
 | More to come....
 
 # <a id="types"></a> Types 
