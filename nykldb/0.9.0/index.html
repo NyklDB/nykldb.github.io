@@ -46,7 +46,7 @@
     <section>
         <article><h1><img src="nykldb-logo.png" alt="N" id="nykldb-logo">yklDB Documentation</h1>
 <h4>NyklDB Version 0.9.0</h4>
-<h5>May 12, 2023</h5>
+<h5>August 27, 2023</h5>
 <p>NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a <a href="#database-structure">table-like structure</a>, with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB.</p>
 <p>It is designed to be fast, scaleable and easy to use. NyklDB contains a <a href="#search">basic search engine</a> that allows you to perform complex searches, and it can execute mathimatical, boolean, and text based <a href="#formulas">formulas</a> to preform transformations and calculations on your data.</p>
 <p>NyklDB data is also <a href="#sort-shuffle-and-filter">sortable, filterable</a>, <a href="#sync-and-share">syncable and shareable</a>. All data inputs are <a href="#data-validation">validated</a> according to <a href="#types">data type</a>, and data can be <a href="#importing-data">imported</a> or exported as JSON documents.</p>
@@ -77,7 +77,7 @@
 <li><a href="#getting-started">Getting Started</a>
 <ul>
 <li><a href="#javascript-installation">JavaScript Installation</a></li>
-<li><a href="#setting-up-a-new-nykldb-object">Setting up a new NyklDB Object</a></li>
+<li><a href="#setting-up-a-new-nykldb">Setting up a new NyklDB</a></li>
 <li><a href="#the-options-parameter">The Options Parameter</a>
 <ul>
 <li><a href="#importing-data">Importing Data</a></li>
@@ -101,7 +101,7 @@
 </li>
 <li>
 <p>Data type validation: NyklDB ensures that data that you write to it is correct before it gets written, according
-to the <a href="#types"><em>type</em></a> of data that you specified. This helps to elliminate or correct many common input mistakes, and takes care of much of your form validation work for you, such as for names, email addresses and phone numbers.</p>
+to the <a href="#types"><em>type</em></a> of data that you specified. This helps to eliminate or correct many common input mistakes, and takes care of much of your form validation work for you, such as for names, email addresses and phone numbers.</p>
 </li>
 </ul>
 <h3><a id="database-structure"></a> Database Structure</h3>
@@ -214,8 +214,8 @@ in lowercase.</p>
 <p>NyklDB can aid, or hint to a user what they might be able to search for by returning search suggestions based on
 partial word matches. This is surprisingly fast and can be used to create an as-you-type experience to fill in a
 search box and/or the dropdown list under the search box. Recent successful searches are cached and returned at the
-top of the next search suggestion, giving you search history as well (though this cache isn't saved anywhere so will
-be gone the next time you access the app or webpage).</p>
+top of the next search suggestion, giving you search history as well (though this cache isn't saved anywhere so it will
+be gone the next time you access the app or refresh the webpage).</p>
 <h3><a id="sync-and-share"></a>Sync and Share</h3>
 <p>Data can be exported as a JSON file which can be saved or transferred somewhere and reimported without worrying
 about overwriting more recent data because all data (in every single cell) is stored with accompanying LastModified
@@ -226,13 +226,17 @@ Conflict resolution follows the assumption that the most recent data in each cel
 <h3><a id="data-validation"></a> Data Validation</h3>
 <p>Data that you input into a NyklDB object is validated before it is saved, at a minimum, by verifying that it is
 either a String, Number, or Boolean value. All data <em>must</em> fall into one of these three categories. Other types of
-data, such as JavaScript Objects, Arrays or the values 'null' and 'undefined' are not allowed in a NyklDB and will
+data, such as JavaScript Objects, Arrays or the values <code>null</code> and <code>undefined</code> are not allowed in a NyklDB and will
 throw an error.</p>
+<blockquote>
+<h4>Why no <code>null</code> or <code>undefined</code>?</h4>
+<p>Trying to save the values <code>null</code> or <code>undefined</code> likely indicates an error somewhere in your code. If you would like to clear a string value, save the value <code>''</code> (an empty string). If it's a number, save <code>0</code>, or a boolean, save <code>false</code>. These are the default values that a new row will contain when it is first initialized (unless you specify a different initial value for a column).</p>
+</blockquote>
 <p>Within these 3 general types of data are many more subtypes. Additional data validation, and sometimes error
 correction can be done by specifying a subtype, i.e. streetAddress is a subtype of String. Some subtypes fall into
 more than one category such as <em>postalZipCode</em> which can be a String or a Number. <a href="#types">See Types below</a> for a
 complete list of all the different subtypes.</p>
-<p>If you want the most flexibility you can specify <em>any</em>, which will allow any type of data to be saved to that column
+<p>If you want the most flexibility you can specify <em>&quot;any&quot;</em>, which will allow any type of data to be saved to that column
 in the table, as long as it is a String, Number or Boolean value (though there is no additional validation).</p>
 <p>The data type for each column in the table is best specified when the table is created, but in some cases can be
 changed afterwards, if it doesn't cause a conflict with the existing data in the table.</p>
@@ -242,30 +246,13 @@ follow the following rules:</p>
 <ul>
 <li>Start with a function name, followed by parentheses</li>
 <li>Put function parameters inside the parentheses, separated by commas</li>
-<li>Parameters inside 'single' or &quot;double&quot; quotes are literal values</li>
-<li>Parameters without quotes, and starting with a $ (dollar sign) refer to a custom property name</li>
-<li>Parameters without quotes, and with no $ refer to a column name</li>
+<li>Parameters inside &quot;double&quot; quotes are literal text values</li>
+<li>Parameters without quotes, and starting with a $ (dollar sign) refer to a column name</li>
+<li>Parameters without quotes, and starting with a # (pound sign) refer to a property name</li>
 <li>Dots join functions together</li>
+<li>Functions can be nested inside other functions</li>
 </ul>
-<blockquote>
-<h6>Formula example</h6>
-<p><code>GET_VALUE(LastName).TO_UPPERCASE().JOIN(&quot;, &quot;, FirstName, &quot; &quot;, MiddleName).TRIM()</code>
-gets the value in column 'LastName', converts it to ALL CAPS, joins it with a &quot;, &quot; (comma space), the value in column
-'FirstName', &quot; &quot; (space), the value in column 'MiddleName', and then trims out any extra spaces to build something like
-<code>SMITH, William John</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">If a literal value (in quotes) contains an apostrophe or quote symbol, you must preceed it with a backslash, otherwise it will be interpreted as the end of the literal value. So this is OK in single quotes: <code>'He said, &quot;How\'s it goin\'?&quot;'</code> or like this in double quotes: <code>&quot;He said, \&quot;How's it goin'?\&quot;&quot;</code></td>
-</tr>
-</tbody>
-</table>
+
 <p>Available functions include:</p>
 <table>
 <thead>
@@ -274,6 +261,7 @@ gets the value in column 'LastName', converts it to ALL CAPS, joins it with a &q
 <th>Alternate Names</th>
 <th>Description</th>
 <th>Parameters</th>
+<th>Returns</th>
 </tr>
 </thead>
 <tbody>
@@ -282,122 +270,180 @@ gets the value in column 'LastName', converts it to ALL CAPS, joins it with a &q
 <td>PLUS</td>
 <td>Add 2 numbers together</td>
 <td>Num1, Num2</td>
+<td>Number</td>
 </tr>
 <tr>
 <td>DIVIDE</td>
 <td></td>
 <td>Divide Num1 by Num2</td>
 <td>Num1, Num2</td>
+<td>Number</td>
 </tr>
 <tr>
 <td>GET_VALUE</td>
-<td>VALUE, VAL</td>
+<td>VALUE_OF, VALUE, VAL</td>
 <td>Retrieve a value</td>
-<td>ColName or $PropName</td>
+<td>$ColName or #PropName</td>
+<td>Value</td>
 </tr>
 <tr>
 <td>HAS_VALUE</td>
 <td>IS_NOT_EMPTY</td>
 <td>Check whether a value has been assigned</td>
-<td>ColName or $PropName</td>
+<td>$ColName or #PropName</td>
+<td>Boolean</td>
 </tr>
 <tr>
 <td>IF</td>
 <td></td>
 <td>Check whether a condition is true</td>
-<td>Condition, if_True, if_False</td>
+<td>TestFunct, ValueIfTrue, ValueIfFalse</td>
+<td>Value</td>
 </tr>
 <tr>
 <td>IS_BOOLEAN</td>
 <td></td>
 <td>Check if a value is a true or false (boolean) value</td>
 <td>Value</td>
+<td>Boolean</td>
 </tr>
 <tr>
 <td>IS_EQUAL</td>
-<td></td>
+<td>EQUALS</td>
 <td>Check if 2 values are the same</td>
 <td>Value1, Value2</td>
+<td>Boolean</td>
 </tr>
 <tr>
 <td>IS_GREATER_THAN</td>
 <td>IS_GT</td>
 <td>Check if Num1 is greater than Num2</td>
 <td>Num1, Num2</td>
+<td>Boolean</td>
 </tr>
 <tr>
 <td>IS_LESS_THAN</td>
 <td>IS_LT</td>
 <td>Check if Num1 is less than Num2</td>
 <td>Num1, Num2</td>
+<td>Boolean</td>
 </tr>
 <tr>
 <td>IS_NUMBER</td>
 <td>IS_NUM</td>
 <td>Check if a value is a number</td>
-<td>ColName or $PropName</td>
+<td>$ColName or #PropName</td>
+<td>Boolean</td>
 </tr>
 <tr>
 <td>IS_STRING</td>
 <td>IS_STR, IS_TEXT</td>
 <td>Check if a value is a text value</td>
-<td>ColName or $PropName</td>
+<td>$ColName or #PropName</td>
+<td>Boolean</td>
 </tr>
 <tr>
 <td>JOIN</td>
 <td></td>
 <td>Join text values together</td>
-<td>Any # of ColNames, $PropNames or &quot;text&quot;</td>
+<td>Any # of $ColNames, #PropNames or &quot;text&quot;</td>
+<td>String</td>
 </tr>
 <tr>
 <td>MINUS</td>
 <td>SUBTRACT</td>
 <td>Subtract Num2 from Num1</td>
 <td>Num1, Num2</td>
+<td>Number</td>
 </tr>
 <tr>
 <td>MULTIPLY</td>
 <td>TIMES</td>
 <td>Multply Num1 by Num2</td>
 <td>Num1, Num2</td>
+<td>Number</td>
+</tr>
+<tr>
+<td>TO_NUMBER</td>
+<td>TO_NUM</td>
+<td>Convert value to number</td>
+<td></td>
+<td>Number</td>
+</tr>
+<tr>
+<td>TO_STRING</td>
+<td>TO_STR, TO_TEXT</td>
+<td>Convert value to text</td>
+<td></td>
+<td>String</td>
 </tr>
 <tr>
 <td>TO_LOWERCASE</td>
 <td>TO_LOWER, TO_LC</td>
 <td>Convert text to lowercase letters</td>
 <td></td>
+<td>String</td>
 </tr>
 <tr>
 <td>TO_TITLECASE</td>
 <td>TO_TITLE, TO_TC</td>
 <td>Capitalise text</td>
 <td></td>
+<td>String</td>
 </tr>
 <tr>
 <td>TO_UPPERCASE</td>
 <td>TO_UPPER, TO_UC</td>
 <td>Convert text to all uppercase letters</td>
 <td></td>
+<td>String</td>
 </tr>
 <tr>
 <td>TRIM</td>
 <td></td>
 <td>Remove extra spaces from text</td>
 <td></td>
+<td>String</td>
 </tr>
 <tr>
 <td>More to come....</td>
 <td></td>
 <td></td>
 <td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<h6>Formula example</h6>
+<p><code>GET_VALUE($LastName).TO_UPPERCASE().JOIN(&quot;, &quot;,$FirstName,&quot; &quot;,$MiddleName).TRIM()</code>
+gets the value in column 'LastName', converts it to ALL CAPS, joins it with a &quot;, &quot; (comma space), the value in column
+'FirstName', &quot; &quot; (space), the value in column 'MiddleName', and then trims out any extra spaces to build something like
+<code>SMITH, William John</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">A note on literal text values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">If a literal value (in double quotes) contains a double quote symbol, you must escape it (preceed it with a backslash), otherwise it will be interpreted as the end of the literal value and not as part of the text. <br><br>For example: to create <code>William &quot;The Boss&quot; Smith</code>, you would do: <br><br><code>JOIN($FirstName,&quot; \&quot;&quot;,$NickName,&quot;\&quot; &quot;,$LastName)</code><br><br>or in JavaScript:</td>
+</tr>
+</tbody>
+</table>
+<pre class="prettyprint source lang-JavaScript"><code>// in single quotes
+var formula = 'JOIN($FirstName,&quot; \&quot;&quot;,$NickName,&quot;\&quot; &quot;,$LastName)';
+
+// in double quotes (note the triple backslash because you must escape the escape symbol too)
+var formula2 = &quot;JOIN($FirstName,\&quot; \\\&quot;\&quot;,$NickName,\&quot;\\\&quot; \&quot;,$LastName)&quot;
+</code></pre>
 <h1><a id="types"></a> Types</h1>
 <p>The type of data that a column expects can be specified when creating a new table or adding a new column to a table.
 Any data that you try to set on a cell will be first validated according to what type of data the column accepts.
-In some cases the data will be coerced into fitting into the column type, for example converting the string value
-&quot;4&quot; into the number 4, or an error will be returned.</p>
+In some cases the data will be coerced into fitting into the column type (for example converting the string value
+&quot;4&quot; into the number 4), or in other cases an error will be returned.</p>
 <p>Some of the types are actually validated exactly the same, for example <strong>string</strong> and <strong>multilineString</strong>, but you
 can use a specific type to indicate what sort of input field to provide to the user for that particular value. A
 <strong>string</strong> value might use a basic <code>input</code> of <code>type=&quot;text&quot;</code>, whereas a <strong>multilineString</strong> may work better as a
@@ -454,7 +500,7 @@ can use a specific type to indicate what sort of input field to provide to the u
 <p>Note: not all types listed are currently fully implementated in this Beta version, specifically uniqueString, password, country, integer, posInteger, negInteger, url, range, and date</p>
 </blockquote>
 <h1><a id="getting-started"></a> Getting Started</h1>
-<p>The data store can run along side your other JavaScript code by adding a &lt;script&gt; tag directly to your HTML
+<p>The data store can run along-side your other JavaScript code by adding a &lt;script&gt; tag directly to your HTML
 document, include it as a Javascript module, or run it in a background task in a Web Worker (which is recommended).</p>
 <h3><a id="javascript-installation"></a> JavaScript Installation</h3>
 <p>To start using NyklDB using JavaSript, download a copy of <code>nyklDB.min.js</code>, <code>base64.min.js</code>, <code>storage.js</code>, <code>Lawnchair.js</code>, and the Lawnchair adaptors that you want to use (<code>dom.js</code>, <code>indexed-db.js</code> for starters), and insert them into your html file with script tags, loading them in this order:</p>
@@ -465,8 +511,8 @@ document, include it as a Javascript module, or run it in a background task in a
     &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/storage.js&quot;>&lt;/script>
     &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/nyklDB.min.js&quot;>&lt;/script>
 </code></pre>
-<h3><a id="setting-up-a-new-nykldb-object"></a> Setting up a new NyklDB Object</h3>
-<p>Setting up a new NyklDB object is as simple as calling the constructor using the &quot;new&quot; keyword and giving it a
+<h3><a id="setting-up-a-new-nykldb"></a> Setting up a new NyklDB</h3>
+<p>Setting up a new NyklDB is as simple as calling the constructor using the &quot;new&quot; keyword and giving it a
 title. The title identifies this particular NyklDB data store. After the NyklDB data store is created, initialize
 it by calling the &quot;init&quot; function and passing it the required table &quot;headers&quot; parameter. Optional &quot;customProperties&quot;
 and &quot;importData&quot; can also be passed to the table on setup. A callback function can return a boolean value indicating
@@ -475,23 +521,24 @@ callback function, 'this' refers to the NyklDB instance.</p>
 <blockquote>
 <p><a href="NyklDB.html">See more details about the NyklDB class</a></p>
 </blockquote>
-<pre class="prettyprint source lang-javascript"><code>var title = &quot;Accounting Spreadsheet&quot;,
-    headers = [
+<pre class="prettyprint source lang-javascript"><code>var myTable = new APP.NyklDB(&quot;Accounting Spreadsheet&quot;);
+
+var headers = [
         { name: &quot;Month&quot;, type: &quot;string&quot;}, 
         { name: &quot;Monthly Income&quot;, type: &quot;posInteger&quot; }, 
         { name: &quot;Monthly Expenses&quot;, type: &quot;negInteger&quot; },
         { name: &quot;Balance&quot;, type: &quot;integer&quot;}
-    ],
-    options = {
+    ];
+var options = {
         //see 'The Options Parameter' below
-    },
-    callback = function (success, errors) { 
+    };
+var callback = function (success, errors) { 
         if (success) {
             console.log(this.getTitle()); //returns &quot;Accounting Spreadsheet&quot;
             //update UI to show newly created NyklDB here
         } else console.log(errors);
 };
-var myTable = new APP.NyklDB(title);
+
 myTable.init(headers, options, callback);
 myTable.getLength(); //returns 0
 </code></pre>
@@ -517,7 +564,7 @@ myTable.getLength(); //returns 0
     {
         name: &quot;Balance&quot;,
         type: &quot;integer&quot;,
-        formula: &quot;SUBTRACT('Monthly Income','Monthly Expenses')&quot;
+        formula: &quot;SUBTRACT($Monthly_Income,$Monthly_Expenses)&quot;
     }
 ]
 </code></pre>
@@ -557,7 +604,7 @@ that applies to the entire database. The existence of a custom property must be 
 is created, and must be given an initial value. Just like table columns, custom properties can be given a data type
 as well, or they will default to the type <code>&quot;any&quot;</code>.</p>
 <pre class="prettyprint source lang-javascript"><code>customProperties:{
-    //name the custom property what ever you want
+    //name the custom property whatever you want
     &quot;FinalBalance&quot;: {
         &quot;type&quot;: &quot;number&quot;,
         &quot;initialValue&quot;: 10000
@@ -591,8 +638,7 @@ as well, or they will default to the type <code>&quot;any&quot;</code>.</p>
 
 <footer>
     Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a>
-
-  on 13/5/2023
+     on 28/8/2023
 
 </footer>
 
