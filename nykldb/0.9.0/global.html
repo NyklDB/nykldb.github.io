@@ -373,241 +373,6 @@ i.e. <code>if (type.match(valid_string_types))</code>...</p>
     
 
     
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="validate"><span class="type-signature"></span>validate<span class="signature">(value, valueType, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#validate_returnValue">validate_returnValue</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Validate runs the value through a number of checks including whether it is of the correct data type. It may also fix some common data input and formatting errors</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>the value to check, of any type</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>valueType</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#typeString">typeString</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>an input data type, such as 'number', 'emailAddress'...</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#validate_callback">validate_callback</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>returns the value accepted by the table, any errors, and a description of the error</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>version 0.9.0</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>An object containing whether the value could be validated, the updated value, error messages, and additional details</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#validate_returnValue">validate_returnValue</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-    
 
     
         <h3 class="subsection-title">Type Definitions</h3>
@@ -3833,22 +3598,12 @@ item in each array, or false if nothing was found</p></td>
 
             <td class="type">
             
-
                 
 <span class="param-type">Array.&lt;string></span>
 
 
             
             </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
 
             
                 <td class="attributes">
@@ -3866,7 +3621,7 @@ item in each array, or false if nothing was found</p></td>
                 </td>
             
 
-            <td class="description last"><p>if the type is 'textSelect' or 'textSuggest', an array of text values</p></td>
+            <td class="description last"><p>an array of text values, for a column of type 'textSelect' or 'textSuggest'</p></td>
         </tr>
 
     
@@ -3957,7 +3712,6 @@ item in each array, or false if nothing was found</p></td>
 
         <tr>
             
-
                 <td class="name"><code>key</code></td>
             
 
@@ -6102,14 +5856,14 @@ Contains the title (table title), file (compressed data), and the syncFile and s
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="NyklDB.html">NyklDB</a></li></ul><h3>Global</h3><ul><li><a href="global.html#valid_boolean_types">valid_boolean_types</a></li><li><a href="global.html#valid_data_types">valid_data_types</a></li><li><a href="global.html#valid_number_types">valid_number_types</a></li><li><a href="global.html#valid_string_types">valid_string_types</a></li><li><a href="global.html#validate">validate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="NyklDB.html">NyklDB</a></li></ul><h3>Global</h3><ul><li><a href="global.html#valid_boolean_types">valid_boolean_types</a></li><li><a href="global.html#valid_data_types">valid_data_types</a></li><li><a href="global.html#valid_number_types">valid_number_types</a></li><li><a href="global.html#valid_string_types">valid_string_types</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
     Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a>
-     on 17/1/2024
+     on 22/1/2024
 </footer>
 
 <script> prettyPrint(); </script>
