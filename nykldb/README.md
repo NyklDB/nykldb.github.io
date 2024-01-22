@@ -229,6 +229,7 @@ Available functions include:
 | TO_LOWERCASE		|                   | Convert text to lowercase letters	|                                       | String
 | TO_TITLECASE		|                   | Capitalise text					|                                       | String
 | TO_UPPERCASE		|                   | Convert text to all uppercase letters |                                   | String
+
 | TRIM				|					| Remove extra spaces from text		|                                       | String
 | More to come....
 
