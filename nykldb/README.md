@@ -2,7 +2,7 @@
 
 #### NyklDB Version 0.9.0
 
-##### April 28, 2023
+##### January 22, 2024
 
 NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a [table-like structure](#database-structure), with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB. 
 
@@ -27,7 +27,7 @@ NyklDB data is also [sortable, filterable](#sort-shuffle-and-filter), [syncable 
   * [Boolean Types](#boolean-types)
 * [Getting Started](#getting-started)
   * [JavaScript Installation](#javascript-installation)
-  * [Setting up a new NyklDB Object](#setting-up-a-new-nykldb-object)
+  * [Setting up a new NyklDB](#setting-up-a-new-nykldb)
   * [The Options Parameter](#the-options-parameter)
     * [Importing Data](#importing-data)
     * [Custom Properties](#custom-properties)
@@ -46,7 +46,7 @@ What does that mean?
 - Document-oriented: Rather than having one "single source of truth" on a server, with NyklDB you may have a copy of your data on your phone, on your PC, and another copy on your friend's PC, etc. When you want to update one copy from another copy, you simply [*synchronize*](#sync-and-share) them. This enables you to use your data offline, and synchronize it when you connect again. NyklDB uses the JSON file format to exchange data.
 
 - Data type validation: NyklDB ensures that data that you write to it is correct before it gets written, according
- to the [*type*](#types) of data that you specified. This helps to elliminate or correct many common input mistakes, and takes care of much of your form validation work for you, such as for names, email addresses and phone numbers.
+ to the [*type*](#types) of data that you specified. This helps to eliminate or correct many common input mistakes, and takes care of much of your form validation work for you, such as for names, email addresses and phone numbers.
 
 ### <a id="database-structure"></a> Database Structure
 
@@ -55,37 +55,54 @@ the actual data is written in JSON (Figure 2).
 
 *Figure 1: Imagine NyklDB as having a table-like structure*
 
-|           |COLUMN 0        |COLUMN 1  |COLUMN 2  |COLUMN 3      |
-|:---------:|:--------------:|----------|----------|--------------|
-|**HEADERS**|**id**          |**Name**  |**Age**   |**Is Awesome**|
-|**TYPES**  |**uniqueString**|**string**|**number**|**boolean**   |
-|**ROW 0**  |**aaa**         |Bob       |42        |false         |
-|**ROW 1**  |**aab**         |Jill      |21        |true          |
-|**ROW 2**  |**aac**         |Anne      |88        |true          |
+|id  |Name (string)|Age (number)|Is Awesome (boolean)|
+|:--:|-------------|------------|--------------------|
+|AAA |Bob          |42          |false               |
+|AAB |Jill         |21          |true                |
+|AAC |Anne         |88          |true                |
 
 *Figure 2: What a NyklDB table really looks like*
 
-```javascript
+```json
 {
-    title: "Table Name",
-    created: 1234567,
-    lastModified: 1234567,
-    version: "0.8.0_1.2",
-    ids: {
-        aaa: [/* lastModified info */],
-        aab: [/* lastModified info */],
-        aac: [/* lastModified info */]
+    "title": "Table_Name",
+    "created": 3064452,
+    "lastModified": 3064455,
+    "deleted": false,
+    "version": "0.9.0",
+    "ids": { 
+        "AAA": [/* lastModified info */],
+        "AAB": [/* lastModified info */],
+        "AAC": [/* lastModified info */]
     },
-    columns: {
-        headers: ["id", "Name", "Age", "Is_Awesome"],
-        meta: {/* column metadata */}
+    "columns": {
+        "headers": ["id", "Name", "Age", "Is_Awesome"],
+        "meta": {/* column metadata */
+            "Name": {
+                "type": ["string", 0],
+                "timestamp": [0, 0],
+                "searchable": [true, 0],
+                "initialValue": ["", 0]
+            },
+            "Age": {
+                "type": ["number", 0],
+                "timestamp": [0, 0],
+                "initialValue": [0, 0]
+            },
+            "Is_Awesome": {
+                "type": ["boolean", 0],
+                "timestamp": [0, 0],
+                "initialValue": [false, 0],
+                "exportAs": ["Is Awesome", 0]
+            }
+        }
     },
-    table: [
-        ["aaa", "Bob", 42, false],
-        ["aab", "Jill", 21, true],
-        ["aac", "Anne", 88, true]
+    "table": [
+        ["AAA", "Bob", 42, false],
+        ["AAB", "Jill", 21, true],
+        ["AAC", "Anne", 88, true]
     ],
-    properties: {/* custom properties */}
+    "properties": {/* table properties */}
 }
 
 ``` 
@@ -135,8 +152,8 @@ in lowercase.
 NyklDB can aid, or hint to a user what they might be able to search for by returning search suggestions based on 
 partial word matches. This is surprisingly fast and can be used to create an as-you-type experience to fill in a 
 search box and/or the dropdown list under the search box. Recent successful searches are cached and returned at the 
-top of the next search suggestion, giving you search history as well (though this cache isn't saved anywhere so will 
-be gone the next time you access the app or webpage).
+top of the next search suggestion, giving you search history as well (though this cache isn't saved anywhere so it will 
+be gone the next time you access the app or refresh the webpage).
 
 ### <a id="sync-and-share"></a>Sync and Share
 
@@ -153,15 +170,18 @@ Sharing data securely based on a Diffie-Hellman key exchange system coming soon.
 
 Data that you input into a NyklDB object is validated before it is saved, at a minimum, by verifying that it is 
 either a String, Number, or Boolean value. All data *must* fall into one of these three categories. Other types of 
-data, such as JavaScript Objects, Arrays or the values 'null' and 'undefined' are not allowed in a NyklDB and will 
+data, such as JavaScript Objects, Arrays or the values `null` and `undefined` are not allowed in a NyklDB and will 
 throw an error.
+
+>#### Why no `null` or `undefined`?
+>Trying to save the values `null` or `undefined` likely indicates an error somewhere in your code. If you would like to clear a string value, save the value `''` (an empty string). If it's a number, save `0`, or a boolean, save `false`. These are the default values that a new row will contain when it is first initialized (unless you specify a different initial value for a column).
 
 Within these 3 general types of data are many more subtypes. Additional data validation, and sometimes error 
 correction can be done by specifying a subtype, i.e. streetAddress is a subtype of String. Some subtypes fall into 
 more than one category such as *postalZipCode* which can be a String or a Number. [See Types below](#types) for a 
 complete list of all the different subtypes.
 
-If you want the most flexibility you can specify *any*, which will allow any type of data to be saved to that column 
+If you want the most flexibility you can specify *"any"*, which will allow any type of data to be saved to that column 
 in the table, as long as it is a String, Number or Boolean value (though there is no additional validation).
 
 The data type for each column in the table is best specified when the table is created, but in some cases can be 
@@ -174,47 +194,69 @@ follow the following rules:
 
 * Start with a function name, followed by parentheses 
 * Put function parameters inside the parentheses, separated by commas
-* Parameters inside (single or double) quotes are literal values
-* Parameters without quotes starting with a $ refer to a custom property name
-* Parameters without quotes with no $ refer to a column name
+* Parameters inside "double" quotes are literal text values
+* Parameters without quotes, and starting with a $ (dollar sign) refer to a column name
+* Parameters without quotes, and starting with a # (pound sign) refer to a property name
 * Dots join functions together
-* Literal values (in quotes) which contain a quote symbol (a ' or a ") can be 'escaped' by placing a backslash before it, so this is OK in single quotes: `'He said, "How\'s it goin\'?"'` or like this in double `"He said, \"How's it goin'?\""`
+* Functions can be nested inside other functions
 
-> Example: `GET_VALUE(LastName).TO_UPPERCASE().JOIN(", ", FirstName, " ", MiddleName).TRIM()`
+Available functions include:
+
+| Function Name		| Alternate Names	| Description						| Parameters                            | Returns
+|-------------------|-------------------|-----------------------------------|---------------------------------------|--------
+| ADD				| PLUS				| Add 2 or more numbers together    | Num1, Num2...                         | Number
+| AND               | ALL_TRUE          | Check whether 2 or more conditions are true | Test1, Test2...             | Boolean
+| CONVERT_UNITS     |                   | Multiply by common unit conversions | Num, FromUnit, ToUnit               | Number
+| DIVIDE			|					| Divide Num1 by Num2				| Num1, Num2                            | Number
+| GET_VALUE			| VALUE_OF, VALUE   | Retrieve a value                  | $ColName or #PropName                 | Value
+| HAS_VALUE			| IS_NOT_EMPTY		| Check whether a value has been assigned | $ColName or #PropName           | Boolean
+| IF				|					| Check whether a condition is true	| Test, ValueIfTrue, ValueIfFalse       | Value
+| IS_BOOLEAN		|					| Check if a value is a true or false (boolean) value | Value               | Boolean
+| IS_EQUAL_TO		| EQUALS			| Check if 2 values are the same	| Value1, Value2                        | Boolean
+| IS_GREATER_THAN	|       			| Check if Num1 is greater than Num2 | Num1, Num2                           | Boolean
+| IS_LESS_THAN		|   				| Check if Num1 is less than Num2	| Num1, Num2                            | Boolean
+| IS_NUMBER			|       			| Check if a value is a number		| $ColName or #PropName                 | Boolean
+| IS_STRING			| IS_TEXT           | Check if a value is a text value	| $ColName or #PropName                 | Boolean
+| JOIN				|					| Join text values together 		| Any # of $ColNames, #PropNames or "text" | String
+| MATCHES           |                   | Check whether any of the values equals Value1 | Value1, Value2...         | Boolean 
+| MINUS				| SUBTRACT			| Subtract Num2 from Num1			| Num1, Num2                            | Number
+| MULTIPLY			| TIMES				| Multply Num1 by Num2				| Num1, Num2                            | Number
+| OR                | ANY_TRUE          | Check whether any condition is true | Test1, Test2...                     | Boolean
+| ROUND             |                   | Round a Num to Decimals length    | Num, Decimals                         | Number 
+| TO_FRACTION       | FRACTION          | Convert a decimal to a fraction   | Num                                   | String
+| TO_NUMBER         |                   | Convert value to number           |                                       | Number
+| TO_STRING         | TO_TEXT           | Convert value to text             |                                       | String
+| TO_LOWERCASE		|                   | Convert text to lowercase letters	|                                       | String
+| TO_TITLECASE		|                   | Capitalise text					|                                       | String
+| TO_UPPERCASE		|                   | Convert text to all uppercase letters |                                   | String
+
+| TRIM				|					| Remove extra spaces from text		|                                       | String
+| More to come....
+
+> ###### Formula example
+> `GET_VALUE($LastName).TO_UPPERCASE().JOIN(", ",$FirstName," ",$MiddleName).TRIM()`
 > gets the value in column 'LastName', converts it to ALL CAPS, joins it with a ", " (comma space), the value in column
 > 'FirstName', " " (space), the value in column 'MiddleName', and then trims out any extra spaces to build something like
 > `SMITH, William John`
 
-Available functions include:
+| A note on literal text values     |
+|:---------|
+| If a literal value (in double quotes) contains a double quote symbol, you must escape it (preceed it with a backslash), otherwise it will be interpreted as the end of the literal value and not as part of the text. <br><br>For example: to create `William "The Boss" Smith`, you would do: <br><br>`JOIN($FirstName," \"",$NickName,"\" ",$LastName)`<br><br>or in JavaScript:
 
-| Function Name		| Alternate Names	| Description						| Parameters
-|-------------------|-------------------|-----------------------------------|------------
-| ADD				| PLUS				| Add 2 numbers together			| Num1, Num2
-| DIVIDE			|					| Divide Num1 by Num2				| Num1, Num2
-| GET_VALUE			| VALUE, VAL		| Retrieve a value					| ColName or $PropName
-| HAS_VALUE			| IS_NOT_EMPTY		| Check whether a value has been assigned| ColName or $PropName
-| IF				|					| Check whether a condition is true	| Condition, if_True, if_False
-| IS_BOOLEAN		|					| Check if a value is a true or false (boolean) value | Value
-| IS_EQUAL			|					| Check if 2 values are the same	| Value1, Value2
-| IS_GREATER_THAN	| IS_GT				| Check if Num1 is greater than Num2 | Num1, Num2
-| IS_LESS_THAN		| IS_LT				| Check if Num1 is less than Num2	| Num1, Num2
-| IS_NUMBER			| IS_NUM			| Check if a value is a number		| ColName or $PropName
-| IS_STRING			| IS_STR, IS_TEXT	| Check if a value is a text value	| ColName or $PropName
-| JOIN				|					| Join text values together 		| Any # of ColNames, $PropNames or "text"
-| MINUS				| SUBTRACT			| Subtract Num2 from Num1			| Num1, Num2
-| MULTIPLY			| TIMES				| Multply Num1 by Num2				| Num1, Num2
-| TO_LOWERCASE		| TO_LOWER, TO_LC	| Convert text to lowercase letters	| 
-| TO_TITLECASE		| TO_TITLE, TO_TC	| Capitalise text					|
-| TO_UPPERCASE		| TO_UPPER, TO_UC	| Convert text to all uppercase letters|
-| TRIM				|					| Remove extra spaces from text		|
-| More to come....
+```JavaScript
+// in single quotes
+var formula = 'JOIN($FirstName," \"",$NickName,"\" ",$LastName)';
+
+// in double quotes (note the triple backslash because you must escape the escape symbol too)
+var formula2 = "JOIN($FirstName,\" \\\"\",$NickName,\"\\\" \",$LastName)"
+```
 
 # <a id="types"></a> Types 
 
 The type of data that a column expects can be specified when creating a new table or adding a new column to a table. 
 Any data that you try to set on a cell will be first validated according to what type of data the column accepts. 
-In some cases the data will be coerced into fitting into the column type, for example converting the string value 
-"4" into the number 4, or an error will be returned.
+In some cases the data will be coerced into fitting into the column type (for example converting the string value 
+"4" into the number 4), or in other cases an error will be returned.
 
 Some of the types are actually validated exactly the same, for example **string** and **multilineString**, but you 
 can use a specific type to indicate what sort of input field to provide to the user for that particular value. A 
@@ -274,7 +316,7 @@ The following types can be specified:
 
 # <a id="getting-started"></a> Getting Started
 
-The data store can run along side your other JavaScript code by adding a \<script\> tag directly to your HTML 
+The data store can run along-side your other JavaScript code by adding a \<script\> tag directly to your HTML 
 document, include it as a Javascript module, or run it in a background task in a Web Worker (which is recommended).
 
 ### <a id="javascript-installation"></a> JavaScript Installation
@@ -289,9 +331,9 @@ To start using NyklDB using JavaSript, download a copy of `nyklDB.min.js`, `base
     <script type="text/javascript" src="scripts/nyklDB.min.js"></script>
 ```
 
-### <a id="setting-up-a-new-nykldb-object"></a> Setting up a new NyklDB Object
+### <a id="setting-up-a-new-nykldb"></a> Setting up a new NyklDB
 
-Setting up a new NyklDB object is as simple as calling the constructor using the "new" keyword and giving it a 
+Setting up a new NyklDB is as simple as calling the constructor using the "new" keyword and giving it a 
 title. The title identifies this particular NyklDB data store. After the NyklDB data store is created, initialize 
 it by calling the "init" function and passing it the required table "headers" parameter. Optional "customProperties" 
 and "importData" can also be passed to the table on setup. A callback function can return a boolean value indicating 
@@ -301,23 +343,24 @@ callback function, 'this' refers to the NyklDB instance.
 > [See more details about the NyklDB class](NyklDB.html)
 
 ```javascript
-var title = "Accounting Spreadsheet",
-    headers = [
+var myTable = new APP.NyklDB("Accounting Spreadsheet");
+
+var headers = [
         { name: "Month", type: "string"}, 
         { name: "Monthly Income", type: "posInteger" }, 
         { name: "Monthly Expenses", type: "negInteger" },
         { name: "Balance", type: "integer"}
-    ],
-    options = {
+    ];
+var options = {
         //see 'The Options Parameter' below
-    },
-    callback = function (success, errors) { 
+    };
+var callback = function (success, errors) { 
         if (success) {
             console.log(this.getTitle()); //returns "Accounting Spreadsheet"
             //update UI to show newly created NyklDB here
         } else console.log(errors);
 };
-var myTable = new APP.NyklDB(title);
+
 myTable.init(headers, options, callback);
 myTable.getLength(); //returns 0
 ```
@@ -346,7 +389,7 @@ var headers = [
     {
         name: "Balance",
         type: "integer",
-        formula: "SUBTRACT('Monthly Income','Monthly Expenses')"
+        formula: "SUBTRACT($Monthly_Income,$Monthly_Expenses)"
     }
 ]
 ```
@@ -398,7 +441,7 @@ as well, or they will default to the type `"any"`.
 
 ```javascript
 customProperties:{
-    //name the custom property what ever you want
+    //name the custom property whatever you want
     "FinalBalance": {
         "type": "number",
         "initialValue": 10000
