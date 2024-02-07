@@ -46,7 +46,7 @@
     <section>
         <article><h1><img src="nykldb-logo.png" alt="N" id="nykldb-logo">yklDB Documentation</h1>
 <h4>NyklDB Version 0.9.0</h4>
-<h5>January 22, 2024</h5>
+<h5>February 6, 2024</h5>
 <p>NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a <a href="#database-structure">table-like structure</a>, with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB.</p>
 <p>It is designed to be fast, scaleable and easy to use. NyklDB contains a <a href="#search">basic search engine</a> that allows you to perform complex searches, and it can execute mathimatical, boolean, and text based <a href="#formulas">formulas</a> to preform transformations and calculations on your data.</p>
 <p>NyklDB data is also <a href="#sort-shuffle-and-filter">sortable, filterable</a>, <a href="#sync-and-share">syncable and shareable</a>. All data inputs are <a href="#data-validation">validated</a> according to <a href="#types">data type</a>, and data can be <a href="#importing-data">imported</a> or exported as JSON documents.</p>
@@ -439,10 +439,22 @@ follow the following rules:</p>
 <td></td>
 <td>String</td>
 </tr>
+<tr>
+<td>TRIM</td>
+<td></td>
+<td>Remove extra spaces from text</td>
+<td></td>
+<td>String</td>
+</tr>
+<tr>
+<td>More to come....</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p>| TRIM				|					| Remove extra spaces from text		|                                       | String
-| More to come....</p>
 <blockquote>
 <h6>Formula example</h6>
 <p><code>GET_VALUE($LastName).TO_UPPERCASE().JOIN(&quot;, &quot;,$FirstName,&quot; &quot;,$MiddleName).TRIM()</code>
