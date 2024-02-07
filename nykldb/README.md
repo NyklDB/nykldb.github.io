@@ -2,7 +2,7 @@
 
 #### NyklDB Version 0.9.0
 
-##### January 22, 2024
+##### February 6, 2024
 
 NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a [table-like structure](#database-structure), with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB. 
 
@@ -229,7 +229,6 @@ Available functions include:
 | TO_LOWERCASE		|                   | Convert text to lowercase letters	|                                       | String
 | TO_TITLECASE		|                   | Capitalise text					|                                       | String
 | TO_UPPERCASE		|                   | Convert text to all uppercase letters |                                   | String
-
 | TRIM				|					| Remove extra spaces from text		|                                       | String
 | More to come....
 

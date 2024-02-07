@@ -735,6 +735,29 @@
 
         <tr>
             
+                <td class="name"><code>getTitlesRequiringSync</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Get all NyklDB table titles that need to be synchronized. This is a static method. <a href="NyklDB.html#.getTitlesRequiringSync">More...</a></p></td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>getType</code></td>
             
 
@@ -919,29 +942,6 @@
 
         <tr>
             
-                <td class="name"><code>isSyncPending</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Checks whether there are changes since the last time the table was synchronized. See also <a href="NyklDB.html#setSyncCompleted">setSyncCompleted</a>. <a href="NyklDB.html#isSyncPending">More...</a></p></td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>NUKEALL</code></td>
             
 
@@ -1119,7 +1119,7 @@
 
             
 
-            <td class="description last"><p>Change the value of NyklDB#syncPending to true if the cloudSyncFile validates. See also <a href="NyklDB.html#isSyncPending">isSyncPending</a>. <a href="NyklDB.html#setSyncCompleted">More...</a></p></td>
+            <td class="description last"><p>Change the value of NyklDB#syncPending to true. <a href="NyklDB.html#setSyncCompleted">More...</a></p></td>
         </tr>
 
     
@@ -7402,203 +7402,6 @@ other calls will also automatically unhide all rows including sync, importJSON, 
     
 
     
-    <h4 class="name" id="isSyncPending"><span class="type-signature"></span>isSyncPending<span class="signature">(cloudSyncFile, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Checks whether there are changes since the last time the table was synchronized</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>cloudSyncFile</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>token that contains the version number, hashed message authentication code (HMAC) and lastSync timestamp of the table</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#success_callback">success_callback</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>success, errors</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Whether or not sync is needed</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="renameColumn"><span class="type-signature"></span>renameColumn<span class="signature">(colName, newName, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string|false}</span></h4>
     
 
@@ -9037,7 +8840,7 @@ Any existing data in the column will be overwritten with the calculated values</
     
 
     
-    <h4 class="name" id="setSyncCompleted"><span class="type-signature"></span>setSyncCompleted<span class="signature">(cloudSyncFile, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="setSyncCompleted"><span class="type-signature"></span>setSyncCompleted<span class="signature">(callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -9045,7 +8848,7 @@ Any existing data in the column will be overwritten with the calculated values</
 
 
 <div class="description">
-    <p>Same as isSyncPending but sets the value of syncPending to true if the cloudSyncFile validates</p>
+    <p>Sets the value of lastSync</p>
 </div>
 
 
@@ -9079,37 +8882,6 @@ Any existing data in the column will be overwritten with the calculated values</
     </thead>
 
     <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>cloudSyncFile</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>token that contains the version number, hashed message authentication code (HMAC) and lastSync timestamp of the table</p></td>
-        </tr>
-
     
 
         <tr>
@@ -11611,10 +11383,6 @@ These titles can then be used to re-initialise the tables by passing the titles 
 
 
 
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a>
-    on 17/1/2024
-
 
     <h5>Parameters:</h5>
     
@@ -11718,6 +11486,208 @@ These titles can then be used to re-initialise the tables by passing the titles 
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getTitlesRequiringSync"><span class="type-signature">(static) </span>getTitlesRequiringSync<span class="signature">(cloudSyncToken, key, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Determines which tables are not up to date with the given token and need to be synchronized.</p>
+<p>A recommended practice would be to save this token separately from the NyklDB tables so you can download this
+very small file first, determine which files need to be synced, and then download and synchronize only those files.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cloudSyncToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>stringified JSON token used to indicate which files need to be synchronized</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>cloud storage key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#getTitles_callback">getTitles_callback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>an array of table titles that need to be synchronized</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -17983,203 +17953,6 @@ other calls will also automatically unhide all rows including sync, importJSON, 
     
 
     
-    <h4 class="name" id="isSyncPending"><span class="type-signature"></span>isSyncPending<span class="signature">(cloudSyncFile, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Checks whether there are changes since the last time the table was synchronized</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>cloudSyncFile</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>token that contains the version number, hashed message authentication code (HMAC) and lastSync timestamp of the table</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#success_callback">success_callback</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>success, errors</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Whether or not sync is needed</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="renameColumn"><span class="type-signature"></span>renameColumn<span class="signature">(colName, newName, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string|false}</span></h4>
     
 
@@ -19618,7 +19391,7 @@ Any existing data in the column will be overwritten with the calculated values</
     
 
     
-    <h4 class="name" id="setSyncCompleted"><span class="type-signature"></span>setSyncCompleted<span class="signature">(cloudSyncFile, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="setSyncCompleted"><span class="type-signature"></span>setSyncCompleted<span class="signature">(callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -19626,7 +19399,7 @@ Any existing data in the column will be overwritten with the calculated values</
 
 
 <div class="description">
-    <p>Same as isSyncPending but sets the value of syncPending to true if the cloudSyncFile validates</p>
+    <p>Sets the value of lastSync</p>
 </div>
 
 
@@ -19660,37 +19433,6 @@ Any existing data in the column will be overwritten with the calculated values</
     </thead>
 
     <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>cloudSyncFile</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>token that contains the version number, hashed message authentication code (HMAC) and lastSync timestamp of the table</p></td>
-        </tr>
-
     
 
         <tr>
@@ -22306,6 +22048,208 @@ These titles can then be used to re-initialise the tables by passing the titles 
     
 
     
+    <h4 class="name" id=".getTitlesRequiringSync"><span class="type-signature">(static) </span>getTitlesRequiringSync<span class="signature">(cloudSyncToken, key, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Determines which tables are not up to date with the given token and need to be synchronized.</p>
+<p>A recommended practice would be to save this token separately from the NyklDB tables so you can download this
+very small file first, determine which files need to be synced, and then download and synchronize only those files.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cloudSyncToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>stringified JSON token used to indicate which files need to be synchronized</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>cloud storage key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#getTitles_callback">getTitles_callback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>an array of table titles that need to be synchronized</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id=".validate"><span class="type-signature">(static) </span>validate<span class="signature">(value, valueType, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#validate_returnValue">validate_returnValue</a>}</span></h4>
     
 
@@ -22554,7 +22498,7 @@ These titles can then be used to re-initialise the tables by passing the titles 
 
 <footer>
     Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a>
-     on 17/1/2024
+     on 6/2/2024
 </footer>
 
 <script> prettyPrint(); </script>
