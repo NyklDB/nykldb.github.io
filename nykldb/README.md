@@ -2,7 +2,7 @@
 
 #### NyklDB Version 0.9.0
 
-##### August 27, 2023
+##### January 22, 2024
 
 NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a [table-like structure](#database-structure), with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB. 
 
