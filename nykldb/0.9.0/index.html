@@ -46,7 +46,7 @@
     <section>
         <article><h1><img src="nykldb-logo.png" alt="N" id="nykldb-logo">yklDB Documentation</h1>
 <h4>NyklDB Version 0.9.0</h4>
-<h5>October 27, 2025</h5>
+<h5>March 19, 2026</h5>
 <p>NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a <a href="#database-structure">table-like structure</a>, with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB.</p>
 <p>It is designed to be fast, scaleable and easy to use. NyklDB contains a <a href="#search">basic search engine</a> that allows you to perform complex searches, and it can execute mathimatical, boolean, and text based <a href="#formulas">formulas</a> to preform transformations and calculations on your data.</p>
 <p>NyklDB data is also <a href="#sort-shuffle-and-filter">sortable, filterable</a>, <a href="#sync-and-share">syncable and shareable</a>. All data inputs are <a href="#data-validation">validated</a> according to <a href="#types">data type</a>, and data can be <a href="#importing-data">imported</a> or exported as JSON documents.</p>
@@ -244,19 +244,19 @@ changed afterwards, if it doesn't cause a conflict with the existing data in the
 <p>You can set a formula on a particular column to pre-calculate its values. Formulas are one line expressions that
 follow the following rules:</p>
 <ul>
-<li>Start with a function name, followed by parentheses</li>
-<li>Put function parameters inside the parentheses, separated by commas</li>
-<li>Parameters inside &quot;double&quot; quotes are literal text values</li>
-<li>Parameters without quotes, and starting with a $ (dollar sign) refer to a column name</li>
-<li>Parameters without quotes, and starting with a # (pound sign) refer to a property name</li>
-<li>Dots join functions together</li>
-<li>Functions can be nested inside other functions</li>
+<li>Start with a function name, followed by parentheses. Function names are written in UPPERCASE. <code>ADD()</code></li>
+<li>Put function parameters inside the parentheses, separated by commas. <code>ADD(1,2)</code></li>
+<li>Parameters inside &quot;double&quot; quotes are literal text values. <code>JOIN(&quot;Mr. &quot;,$LastName)</code></li>
+<li>Parameters without quotes, and starting with a $ (dollar sign) refer to a column name. <code>$Column1</code></li>
+<li>Parameters without quotes, and starting with a # (pound sign) refer to a property name. <code>#Property1</code></li>
+<li>Dots join functions together. <code>ADD($Column1,#Property1).TO_FRACTION()</code></li>
+<li>Functions can be nested inside other functions. <code>IF(IS_NUMBER($Column1),ADD($Column1,#Property1),0)</code></li>
 </ul>
-<p>Available functions include:</p>
+<p><em>Figure 3: Available functions</em></p>
 <table>
 <thead>
 <tr>
-<th>Function Name</th>
+<th style="text-align:center">Function Name</th>
 <th>Alternate Names</th>
 <th>Description</th>
 <th>Parameters</th>
@@ -265,189 +265,189 @@ follow the following rules:</p>
 </thead>
 <tbody>
 <tr>
-<td>ADD</td>
+<td style="text-align:center">ADD</td>
 <td>PLUS</td>
 <td>Add 2 or more numbers together</td>
 <td>Num1, Num2...</td>
 <td>Number</td>
 </tr>
 <tr>
-<td>AND</td>
+<td style="text-align:center">AND</td>
 <td>ALL_TRUE</td>
 <td>Check whether 2 or more conditions are true</td>
 <td>Test1, Test2...</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>CONVERT_UNITS</td>
+<td style="text-align:center">CONVERT_UNITS</td>
 <td></td>
 <td>Multiply by common unit conversions</td>
 <td>Num, FromUnit, ToUnit</td>
 <td>Number</td>
 </tr>
 <tr>
-<td>DIVIDE</td>
+<td style="text-align:center">DIVIDE</td>
 <td></td>
 <td>Divide Num1 by Num2</td>
 <td>Num1, Num2</td>
 <td>Number</td>
 </tr>
 <tr>
-<td>GET_VALUE</td>
+<td style="text-align:center">GET_VALUE</td>
 <td>VALUE_OF, VALUE</td>
 <td>Retrieve a value</td>
 <td>$ColName or #PropName</td>
 <td>Value</td>
 </tr>
 <tr>
-<td>HAS_VALUE</td>
+<td style="text-align:center">HAS_VALUE</td>
 <td>IS_NOT_EMPTY</td>
 <td>Check whether a value has been assigned</td>
 <td>$ColName or #PropName</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>IF</td>
+<td style="text-align:center">IF</td>
 <td></td>
 <td>Check whether a condition is true</td>
 <td>Test, ValueIfTrue, ValueIfFalse</td>
 <td>Value</td>
 </tr>
 <tr>
-<td>IS_BOOLEAN</td>
+<td style="text-align:center">IS_BOOLEAN</td>
 <td></td>
 <td>Check if a value is a true or false (boolean) value</td>
 <td>Value</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>IS_EQUAL_TO</td>
+<td style="text-align:center">IS_EQUAL_TO</td>
 <td>EQUALS</td>
 <td>Check if 2 values are the same</td>
 <td>Value1, Value2</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>IS_GREATER_THAN</td>
+<td style="text-align:center">IS_GREATER_THAN</td>
 <td></td>
 <td>Check if Num1 is greater than Num2</td>
 <td>Num1, Num2</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>IS_LESS_THAN</td>
+<td style="text-align:center">IS_LESS_THAN</td>
 <td></td>
 <td>Check if Num1 is less than Num2</td>
 <td>Num1, Num2</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>IS_NUMBER</td>
+<td style="text-align:center">IS_NUMBER</td>
 <td></td>
 <td>Check if a value is a number</td>
 <td>$ColName or #PropName</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>IS_STRING</td>
+<td style="text-align:center">IS_STRING</td>
 <td>IS_TEXT</td>
 <td>Check if a value is a text value</td>
 <td>$ColName or #PropName</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>JOIN</td>
+<td style="text-align:center">JOIN</td>
 <td></td>
 <td>Join text values together</td>
-<td>Any # of $ColNames, #PropNames or &quot;text&quot;</td>
+<td>Text1, Text2...</td>
 <td>String</td>
 </tr>
 <tr>
-<td>MATCHES</td>
+<td style="text-align:center">MATCHES</td>
 <td></td>
 <td>Check whether any of the values equals Value1</td>
 <td>Value1, Value2...</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>MINUS</td>
+<td style="text-align:center">MINUS</td>
 <td>SUBTRACT</td>
 <td>Subtract Num2 from Num1</td>
 <td>Num1, Num2</td>
 <td>Number</td>
 </tr>
 <tr>
-<td>MULTIPLY</td>
+<td style="text-align:center">MULTIPLY</td>
 <td>TIMES</td>
 <td>Multply Num1 by Num2</td>
 <td>Num1, Num2</td>
 <td>Number</td>
 </tr>
 <tr>
-<td>OR</td>
+<td style="text-align:center">OR</td>
 <td>ANY_TRUE</td>
 <td>Check whether any condition is true</td>
 <td>Test1, Test2...</td>
 <td>Boolean</td>
 </tr>
 <tr>
-<td>ROUND</td>
+<td style="text-align:center">ROUND</td>
 <td></td>
 <td>Round a Num to Decimals length</td>
 <td>Num, Decimals</td>
 <td>Number</td>
 </tr>
 <tr>
-<td>TO_FRACTION</td>
+<td style="text-align:center">TO_FRACTION</td>
 <td>FRACTION</td>
 <td>Convert a decimal to a fraction</td>
 <td>Num</td>
 <td>String</td>
 </tr>
 <tr>
-<td>TO_NUMBER</td>
+<td style="text-align:center">TO_NUMBER</td>
 <td></td>
 <td>Convert value to number</td>
 <td></td>
 <td>Number</td>
 </tr>
 <tr>
-<td>TO_STRING</td>
+<td style="text-align:center">TO_STRING</td>
 <td>TO_TEXT</td>
 <td>Convert value to text</td>
 <td></td>
 <td>String</td>
 </tr>
 <tr>
-<td>TO_LOWERCASE</td>
+<td style="text-align:center">TO_LOWERCASE</td>
 <td></td>
 <td>Convert text to lowercase letters</td>
 <td></td>
 <td>String</td>
 </tr>
 <tr>
-<td>TO_TITLECASE</td>
+<td style="text-align:center">TO_TITLECASE</td>
 <td></td>
 <td>Capitalise text</td>
 <td></td>
 <td>String</td>
 </tr>
 <tr>
-<td>TO_UPPERCASE</td>
+<td style="text-align:center">TO_UPPERCASE</td>
 <td></td>
 <td>Convert text to all uppercase letters</td>
 <td></td>
 <td>String</td>
 </tr>
 <tr>
-<td>TRIM</td>
+<td style="text-align:center">TRIM</td>
 <td></td>
 <td>Remove extra spaces from text</td>
 <td></td>
 <td>String</td>
 </tr>
 <tr>
-<td>More to come....</td>
+<td style="text-align:center">More to come...</td>
 <td></td>
 <td></td>
 <td></td>
@@ -624,7 +624,7 @@ in the form of a CSV file (string), or JSON object, and custom properties that y
             &quot;type&quot;: &quot;boolean&quot;,
             &quot;initialValue&quot;: true
         }
-    }	
+    } 
 };
 </code></pre>
 <h5><a id="importing-data"></a> Importing Data</h5>
@@ -650,7 +650,7 @@ as well, or they will default to the type <code>&quot;any&quot;</code>.</p>
         &quot;type&quot;: &quot;boolean&quot;,
         &quot;initialValue&quot;: true
     }
-}	
+} 
 </code></pre>
 <h1><a id="dependencies"></a> Dependencies</h1>
 <ul>
@@ -675,7 +675,7 @@ as well, or they will default to the type <code>&quot;any&quot;</code>.</p>
 
 <footer>
     Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
-     on 27/10/2025
+     on 19/3/2026
 </footer>
 
 <script> prettyPrint(); </script>
