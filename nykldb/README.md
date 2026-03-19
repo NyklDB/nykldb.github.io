@@ -2,7 +2,7 @@
 
 #### NyklDB Version 0.9.0
 
-##### October 27, 2025
+##### March 19, 2026
 
 NyklDB is a document-oriented database that stores data as JSON documents. Data in a NyklDB has a [table-like structure](#database-structure), with columns and rows, therefore, any data that you can visualize as a table or spreadsheet can be stored in a NyklDB. 
 
@@ -192,45 +192,45 @@ changed afterwards, if it doesn't cause a conflict with the existing data in the
 You can set a formula on a particular column to pre-calculate its values. Formulas are one line expressions that 
 follow the following rules:
 
-* Start with a function name, followed by parentheses 
-* Put function parameters inside the parentheses, separated by commas
-* Parameters inside "double" quotes are literal text values
-* Parameters without quotes, and starting with a $ (dollar sign) refer to a column name
-* Parameters without quotes, and starting with a # (pound sign) refer to a property name
-* Dots join functions together
-* Functions can be nested inside other functions
+* Start with a function name, followed by parentheses. Function names are written in UPPERCASE. `ADD()`
+* Put function parameters inside the parentheses, separated by commas. `ADD(1,2)`
+* Parameters inside "double" quotes are literal text values. `JOIN("Mr. ",$LastName)`
+* Parameters without quotes, and starting with a $ (dollar sign) refer to a column name. `$Column1`
+* Parameters without quotes, and starting with a # (pound sign) refer to a property name. `#Property1`
+* Dots join functions together. `ADD($Column1,#Property1).TO_FRACTION()`
+* Functions can be nested inside other functions. `IF(IS_NUMBER($Column1),ADD($Column1,#Property1),0)`
 
-Available functions include:
+*Figure 3: Available functions*
 
-| Function Name		| Alternate Names	| Description						| Parameters                            | Returns
-|-------------------|-------------------|-----------------------------------|---------------------------------------|--------
-| ADD				| PLUS				| Add 2 or more numbers together    | Num1, Num2...                         | Number
-| AND               | ALL_TRUE          | Check whether 2 or more conditions are true | Test1, Test2...             | Boolean
-| CONVERT_UNITS     |                   | Multiply by common unit conversions | Num, FromUnit, ToUnit               | Number
-| DIVIDE			|					| Divide Num1 by Num2				| Num1, Num2                            | Number
-| GET_VALUE			| VALUE_OF, VALUE   | Retrieve a value                  | $ColName or #PropName                 | Value
-| HAS_VALUE			| IS_NOT_EMPTY		| Check whether a value has been assigned | $ColName or #PropName           | Boolean
-| IF				|					| Check whether a condition is true	| Test, ValueIfTrue, ValueIfFalse       | Value
-| IS_BOOLEAN		|					| Check if a value is a true or false (boolean) value | Value               | Boolean
-| IS_EQUAL_TO		| EQUALS			| Check if 2 values are the same	| Value1, Value2                        | Boolean
-| IS_GREATER_THAN	|       			| Check if Num1 is greater than Num2 | Num1, Num2                           | Boolean
-| IS_LESS_THAN		|   				| Check if Num1 is less than Num2	| Num1, Num2                            | Boolean
-| IS_NUMBER			|       			| Check if a value is a number		| $ColName or #PropName                 | Boolean
-| IS_STRING			| IS_TEXT           | Check if a value is a text value	| $ColName or #PropName                 | Boolean
-| JOIN				|					| Join text values together 		| Any # of $ColNames, #PropNames or "text" | String
-| MATCHES           |                   | Check whether any of the values equals Value1 | Value1, Value2...         | Boolean 
-| MINUS				| SUBTRACT			| Subtract Num2 from Num1			| Num1, Num2                            | Number
-| MULTIPLY			| TIMES				| Multply Num1 by Num2				| Num1, Num2                            | Number
-| OR                | ANY_TRUE          | Check whether any condition is true | Test1, Test2...                     | Boolean
-| ROUND             |                   | Round a Num to Decimals length    | Num, Decimals                         | Number 
-| TO_FRACTION       | FRACTION          | Convert a decimal to a fraction   | Num                                   | String
-| TO_NUMBER         |                   | Convert value to number           |                                       | Number
-| TO_STRING         | TO_TEXT           | Convert value to text             |                                       | String
-| TO_LOWERCASE		|                   | Convert text to lowercase letters	|                                       | String
-| TO_TITLECASE		|                   | Capitalise text					|                                       | String
-| TO_UPPERCASE		|                   | Convert text to all uppercase letters |                                   | String
-| TRIM				|					| Remove extra spaces from text		|                                       | String
-| More to come....
+|Function Name  |Alternate Names|Description                                        |Parameters           |Returns|
+|:-------------:|---------------|---------------------------------------------------|---------------------|-------|
+|ADD            |PLUS           |Add 2 or more numbers together                     |Num1, Num2...        |Number |
+|AND            |ALL_TRUE       |Check whether 2 or more conditions are true        |Test1, Test2...      |Boolean|
+|CONVERT_UNITS  |               |Multiply by common unit conversions                |Num, FromUnit, ToUnit|Number |
+|DIVIDE         |               |Divide Num1 by Num2                                |Num1, Num2           |Number |
+|GET_VALUE      |VALUE_OF, VALUE|Retrieve a value                                   |$ColName or #PropName|Value  |
+|HAS_VALUE      |IS_NOT_EMPTY   |Check whether a value has been assigned            |$ColName or #PropName|Boolean|
+|IF             |               |Check whether a condition is true                  |Test, ValueIfTrue, ValueIfFalse|Value  |
+|IS_BOOLEAN     |               |Check if a value is a true or false (boolean) value|Value                |Boolean|
+|IS_EQUAL_TO    |EQUALS         |Check if 2 values are the same                     |Value1, Value2       |Boolean|
+|IS_GREATER_THAN|               |Check if Num1 is greater than Num2                 |Num1, Num2           |Boolean|
+|IS_LESS_THAN   |               |Check if Num1 is less than Num2                    |Num1, Num2           |Boolean|
+|IS_NUMBER      |               |Check if a value is a number                       |$ColName or #PropName|Boolean|
+|IS_STRING      |IS_TEXT        |Check if a value is a text value                   |$ColName or #PropName|Boolean|
+|JOIN           |               |Join text values together                          |Text1, Text2...      |String |
+|MATCHES        |               |Check whether any of the values equals Value1      |Value1, Value2...    |Boolean|
+|MINUS          |SUBTRACT       |Subtract Num2 from Num1                            |Num1, Num2           |Number |
+|MULTIPLY       |TIMES          |Multply Num1 by Num2                               |Num1, Num2           |Number |
+|OR             |ANY_TRUE       |Check whether any condition is true                |Test1, Test2...      |Boolean|
+|ROUND          |               |Round a Num to Decimals length                     |Num, Decimals        |Number |
+|TO_FRACTION    |FRACTION       |Convert a decimal to a fraction                    |Num                  |String |
+|TO_NUMBER      |               |Convert value to number                            |                     |Number |
+|TO_STRING      |TO_TEXT        |Convert value to text                              |                     |String |
+|TO_LOWERCASE   |               |Convert text to lowercase letters                  |                     |String |
+|TO_TITLECASE   |               |Capitalise text                                    |                     |String |
+|TO_UPPERCASE   |               |Convert text to all uppercase letters              |                     |String |
+|TRIM           |               |Remove extra spaces from text                      |                     |String |
+|More to come...|               |                                                   |                     |       |
 
 > ###### Formula example
 > `GET_VALUE($LastName).TO_UPPERCASE().JOIN(", ",$FirstName," ",$MiddleName).TRIM()`
@@ -411,7 +411,7 @@ var options = {
             "type": "boolean",
             "initialValue": true
         }
-    }	
+    } 
 };
 ```
 
@@ -445,7 +445,7 @@ customProperties:{
         "type": "boolean",
         "initialValue": true
     }
-}	
+} 
 ```
 
 # <a id="dependencies"></a> Dependencies
