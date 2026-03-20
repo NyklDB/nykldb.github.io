@@ -544,13 +544,8 @@ can use a specific type to indicate what sort of input field to provide to the u
 <p>The data store can run along-side your other JavaScript code by adding a &lt;script&gt; tag directly to your HTML
 document, include it as a Javascript module, or run it in a background task in a Web Worker (which is recommended).</p>
 <h3><a id="javascript-installation"></a> JavaScript Installation</h3>
-<p>To start using NyklDB using JavaSript, download a copy of <code>nyklDB.min.js</code>, <code>base64.min.js</code>, <code>storage.js</code>, <code>Lawnchair.js</code>, and the Lawnchair adaptors that you want to use (<code>dom.js</code>, <code>indexed-db.js</code> for starters), and insert them into your html file with script tags, loading them in this order:</p>
-<pre class="prettyprint source lang-html"><code>    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/base64.min.js&quot;>&lt;/script>
-    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/Lawnchair.js&quot;>&lt;/script>
-    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/adapters/indexed-db.js&quot;>&lt;/script>
-    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/adapters/dom.js&quot;>&lt;/script>
-    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/storage.js&quot;>&lt;/script>
-    &lt;script type=&quot;text/javascript&quot; src=&quot;scripts/nyklDB.min.js&quot;>&lt;/script>
+<p>To start using NyklDB using JavaSript, download a copy of <code>nyklDB.min.js</code>, <code>base64.js</code>, <code>storage.js</code>, <code>Lawnchair.js</code>, <code>validate.js</code> and <code>unit-convert.js</code>, and place them in your /scripts folder. Then import NyklDB into your JavaScript project like this:</p>
+<pre class="prettyprint source lang-javascript"><code>import NyklDB from './scripts/nyklDB.min.js';
 </code></pre>
 <h3><a id="setting-up-a-new-nykldb"></a> Setting up a new NyklDB</h3>
 <p>Setting up a new NyklDB is as simple as calling the constructor using the &quot;new&quot; keyword and giving it a
@@ -562,7 +557,9 @@ callback function, 'this' refers to the NyklDB instance.</p>
 <blockquote>
 <p><a href="NyklDB.html">See more details about the NyklDB class</a></p>
 </blockquote>
-<pre class="prettyprint source lang-javascript"><code>var myTable = new APP.NyklDB(&quot;Accounting Spreadsheet&quot;);
+<pre class="prettyprint source lang-javascript"><code>import NyklDB from './scripts/nyklDB.min.js'
+
+var myTable = new NyklDB(&quot;Accounting Spreadsheet&quot;);
 
 var headers = [
         { name: &quot;Month&quot;, type: &quot;string&quot;}, 
@@ -657,6 +654,8 @@ as well, or they will default to the type <code>&quot;any&quot;</code>.</p>
 <li>base64.js</li>
 <li>storage.js</li>
 <li>Lawnchair.js</li>
+<li>unit-convert.js</li>
+<li>validate.js</li>
 </ul></article>
     </section>
 

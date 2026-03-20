@@ -320,14 +320,10 @@ document, include it as a Javascript module, or run it in a background task in a
 
 ### <a id="javascript-installation"></a> JavaScript Installation
 
-To start using NyklDB using JavaSript, download a copy of `nyklDB.min.js`, `base64.min.js`, `storage.js`, `Lawnchair.js`, and the Lawnchair adaptors that you want to use (`dom.js`, `indexed-db.js` for starters), and insert them into your html file with script tags, loading them in this order:
-```html
-    <script type="text/javascript" src="scripts/base64.min.js"></script>
-    <script type="text/javascript" src="scripts/Lawnchair.js"></script>
-    <script type="text/javascript" src="scripts/adapters/indexed-db.js"></script>
-    <script type="text/javascript" src="scripts/adapters/dom.js"></script>
-    <script type="text/javascript" src="scripts/storage.js"></script>
-    <script type="text/javascript" src="scripts/nyklDB.min.js"></script>
+To start using NyklDB using JavaSript, download a copy of `nyklDB.min.js`, `base64.js`, `storage.js`, `Lawnchair.js`, `validate.js` and `unit-convert.js`, and place them in your /scripts folder. Then import NyklDB into your JavaScript project like this:
+
+``` javascript
+import NyklDB from './scripts/nyklDB.min.js';
 ```
 
 ### <a id="setting-up-a-new-nykldb"></a> Setting up a new NyklDB
@@ -342,7 +338,9 @@ callback function, 'this' refers to the NyklDB instance.
 > [See more details about the NyklDB class](NyklDB.html)
 
 ```javascript
-var myTable = new APP.NyklDB("Accounting Spreadsheet");
+import NyklDB from './scripts/nyklDB.min.js'
+
+var myTable = new NyklDB("Accounting Spreadsheet");
 
 var headers = [
         { name: "Month", type: "string"}, 
@@ -453,3 +451,5 @@ customProperties:{
 * base64.js
 * storage.js
 * Lawnchair.js
+* unit-convert.js
+* validate.js
